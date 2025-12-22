@@ -150,7 +150,7 @@ export default function Home() {
 
         {/* Skill Categories */}
         <CinematicSection>
-          <div className="text-center mb-12 pt-20">
+          <div className="text-center mb-12">
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">Skill Categories</h2>
             <p className="text-lg text-white/60">Comprehensive expertise across analytics, tools, and strategy</p>
           </div>
