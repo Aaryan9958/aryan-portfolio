@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import PageTransition from '../components/PageTransition';
+import SectionWrapper from '../components/SectionWrapper';
 
 const projects = [
   {
