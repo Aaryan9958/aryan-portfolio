@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
 import { Toaster } from "./components/ui/toaster";
 import Home from "./pages/Home";
 import Experience from "./pages/Experience";
