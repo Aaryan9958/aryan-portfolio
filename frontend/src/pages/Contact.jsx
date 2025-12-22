@@ -69,8 +69,8 @@ export default function Contact() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#05060A] text-white">
-        <section className="relative min-h-screen pt-32 pb-20 px-6 lg:px-12">
+      <div className="page-container">
+        <SectionWrapper className="relative pt-32 pb-20 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
