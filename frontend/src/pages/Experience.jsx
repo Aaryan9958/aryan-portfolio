@@ -130,8 +130,8 @@ export default function Experience() {
                 key={index}
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                 className="relative"
               >
                 {/* Timeline Dot */}
