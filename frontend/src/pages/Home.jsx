@@ -175,10 +175,10 @@ export default function Home() {
               </ResponsiveContainer>
             </motion.div>
           </div>
-        </section>
+        </SectionWrapper>
 
         {/* Skill Categories */}
-        <section className="scroll-snap-section relative py-20 px-6 lg:px-12">
+        <SectionWrapper className="relative py-20 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
