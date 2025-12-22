@@ -116,7 +116,7 @@ export default function Home() {
 
         {/* Skills Chart Section */}
         <CinematicSection>
-          <div className="text-center mb-12 pt-20">
+          <div className="text-center mb-12">
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">Years of Experience</h2>
             <p className="text-lg text-white/60">Skills developed through hands-on projects and real-world impact</p>
           </div>
