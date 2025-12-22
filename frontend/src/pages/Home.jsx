@@ -137,7 +137,7 @@ export default function Home() {
         </motion.div>
 
         {/* Skills Chart Section */}
-        <SectionWrapper className="relative py-20 px-6 lg:px-12 bg-[#0B0F1A]/50 backdrop-blur-sm">
+        <SectionWrapper className="relative py-16 px-6 lg:px-12 bg-[#0B0F1A]/50 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
