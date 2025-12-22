@@ -87,24 +87,25 @@ export default function Experience() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05060A] text-white">
-      <BackgroundVideo 
-        videoUrl="https://customer-assets.emergentagent.com/job_d6d3bd49-c74e-4d3c-abec-ab44adf6cddc/artifacts/apasc6v1_14683767_3840_2160_30fps.mp4" 
-        overlay={true}
-        blur={false}
-      />
+    <PageTransition>
+      <div className="min-h-screen bg-[#05060A] text-white">
+        <BackgroundVideo 
+          videoUrl="https://customer-assets.emergentagent.com/job_d6d3bd49-c74e-4d3c-abec-ab44adf6cddc/artifacts/apasc6v1_14683767_3840_2160_30fps.mp4" 
+          overlay={true}
+          blur={false}
+        />
 
-      <section className="relative min-h-screen pt-32 pb-20 px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">Experience Journey</h1>
-            <p className="text-xl text-[#9CA3AF]">From insights to impact: my professional timeline</p>
-          </motion.div>
+        <section className="relative min-h-screen pt-32 pb-20 px-6 lg:px-12">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-center mb-16"
+            >
+              <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">Experience Journey</h1>
+              <p className="text-xl text-[#9CA3AF]">From insights to impact: my professional timeline</p>
+            </motion.div>
 
           {/* Curved Timeline */}
           <div className="relative space-y-6">
