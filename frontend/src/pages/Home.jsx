@@ -4,7 +4,6 @@ import { ArrowRight, Database, Code, BarChart3, Brain } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Link } from 'react-router-dom';
 import BackgroundVideo from '../components/BackgroundVideo';
-import Signature from '../components/Signature';
 import PageTransition from '../components/PageTransition';
 import CinematicScroll from '../components/CinematicScroll';
 import CinematicSection from '../components/CinematicSection';
