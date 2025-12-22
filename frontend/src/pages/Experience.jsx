@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import BackgroundVideo from '../components/BackgroundVideo';
 import PageTransition from '../components/PageTransition';
+import SectionWrapper from '../components/SectionWrapper';
 
 const experiences = [
   {
