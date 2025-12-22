@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import BackgroundVideo from '../components/BackgroundVideo';
 import Signature from '../components/Signature';
 import PageTransition from '../components/PageTransition';
+import SectionWrapper from '../components/SectionWrapper';
 import { Button } from '../components/ui/button';
 
 const skillsData = [
