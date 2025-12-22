@@ -78,6 +78,8 @@ const experiences = [
 
 export default function Experience() {
   const [openIndex, setOpenIndex] = useState(null);
+  const { scrollY } = useScroll();
+  const headerOpacity = useTransform(scrollY, [0, 200], [1, 0.8]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -89,16 +91,17 @@ export default function Experience() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#05060A] text-white">
+      <div className="page-container">
         <BackgroundVideo 
           videoUrl="https://customer-assets.emergentagent.com/job_d6d3bd49-c74e-4d3c-abec-ab44adf6cddc/artifacts/apasc6v1_14683767_3840_2160_30fps.mp4" 
           overlay={true}
           blur={false}
         />
 
-        <section className="relative min-h-screen pt-32 pb-20 px-6 lg:px-12">
+        <SectionWrapper className="relative pt-32 pb-20 px-6 lg:px-12">
           <div className="max-w-5xl mx-auto">
             <motion.div
+              style={{ opacity: headerOpacity }}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
