@@ -40,7 +40,7 @@ export default function Projects() {
   return (
     <PageTransition>
       <div className="page-container bg-[#05060A] text-white">
-        <SectionWrapper className="relative pt-32 pb-20 px-6 lg:px-12">
+        <SectionWrapper className="relative pt-32 pb-16 px-6 lg:px-12" isHero={true}>
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
