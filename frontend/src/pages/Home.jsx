@@ -44,8 +44,8 @@ const skillCategories = [
 
 export default function Home() {
   const { scrollY } = useScroll();
-  const heroScale = useTransform(scrollY, [0, 500], [1, 0.95]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.5]);
+  const heroScale = useTransform(scrollY, [0, 500], [1, 0.98]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.7]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#05060A] text-white">
+      <div className="page-container">
         <BackgroundVideo 
           videoUrl="https://customer-assets.emergentagent.com/job_d6d3bd49-c74e-4d3c-abec-ab44adf6cddc/artifacts/apasc6v1_14683767_3840_2160_30fps.mp4" 
           overlay={true}
@@ -61,11 +61,12 @@ export default function Home() {
         />
 
         {/* Hero Section with Parallax */}
-        <motion.section 
+        <motion.div
           style={{ scale: heroScale, opacity: heroOpacity }}
-          className="scroll-snap-section relative min-h-screen flex items-center justify-center pt-20 pb-16 px-6 lg:px-12"
+          className="scroll-snap-section relative flex items-center justify-center pt-20 pb-16 px-6 lg:px-12"
         >
-          <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 items-center">
+          <SectionWrapper className="w-full">
+            <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Headshot + Signature */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
