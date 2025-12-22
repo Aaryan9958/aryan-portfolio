@@ -59,8 +59,8 @@ export default function Home() {
       <CinematicScroll>
         {/* Hero Section */}
         <CinematicSection>
-          <div className="grid lg:grid-cols-2 gap-12 items-center pt-20">
-            {/* Left: Headshot + Signature */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Headshot */}
             <div className="flex flex-col items-center lg:items-start gap-6">
               <div className="relative">
                 <div className="w-72 h-72 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-[#2DD4BF]/10">
@@ -69,9 +69,6 @@ export default function Home() {
                     alt="Aryan Bansal"
                     className="w-full h-full object-cover"
                   />
-                </div>
-                <div className="absolute -bottom-6 left-0 right-0 flex justify-center lg:justify-start">
-                  <Signature />
                 </div>
               </div>
             </div>
