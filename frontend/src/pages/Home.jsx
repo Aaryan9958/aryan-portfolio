@@ -63,9 +63,9 @@ export default function Home() {
         {/* Hero Section with Parallax */}
         <motion.div
           style={{ scale: heroScale, opacity: heroOpacity }}
-          className="scroll-snap-section relative flex items-center justify-center pt-20 pb-16 px-6 lg:px-12"
+          className="hero-section relative flex items-center justify-center pt-20 pb-16 px-6 lg:px-12"
         >
-          <SectionWrapper className="w-full">
+          <SectionWrapper className="w-full" isHero={true}>
             <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Headshot + Signature */}
             <motion.div
