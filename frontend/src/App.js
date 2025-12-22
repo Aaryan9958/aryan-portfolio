@@ -30,7 +30,6 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <AnimatedRoutes />
-        <Footer />
         <Toaster />
       </BrowserRouter>
     </div>
