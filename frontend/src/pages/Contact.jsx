@@ -6,6 +6,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { useToast } from '../hooks/use-toast';
 import PageTransition from '../components/PageTransition';
+import SectionWrapper from '../components/SectionWrapper';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
