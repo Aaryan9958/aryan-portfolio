@@ -116,6 +116,7 @@ export default function Projects() {
           </motion.div>
         </div>
       </section>
+      </div>
     </PageTransition>
   );
 }
