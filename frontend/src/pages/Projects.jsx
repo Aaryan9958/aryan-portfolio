@@ -39,7 +39,7 @@ export default function Projects() {
 
   return (
     <PageTransition>
-      <div className="page-container">
+      <div className="page-container bg-[#05060A] text-white">
         <SectionWrapper className="relative pt-32 pb-20 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -48,74 +48,74 @@ export default function Projects() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-center mb-16"
             >
-            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">Featured Projects</h1>
-            <p className="text-xl text-[#9CA3AF]">Real-world analytics delivering measurable impact</p>
-          </motion.div>
+              <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">Featured Projects</h1>
+              <p className="text-xl text-[#9CA3AF]">Real-world analytics delivering measurable impact</p>
+            </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                whileHover={{ y: -8 }}
-                className="bg-[#0B0F1A]/80 backdrop-blur-md rounded-xl p-8 border border-[#3FB5B5]/20 hover:border-[#3FB5B5]/50 transition-all hover:shadow-xl hover:shadow-[#3FB5B5]/10"
-              >
-                <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
-                <p className="text-[#F5F5F7] leading-relaxed mb-6">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 bg-[#3FB5B5]/20 text-[#3FB5B5] rounded-full text-sm font-medium border border-[#3FB5B5]/30"
+            <div className="grid md:grid-cols-2 gap-8">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                  whileHover={{ y: -8 }}
+                  className="bg-[#0B0F1A]/80 backdrop-blur-md rounded-xl p-8 border border-[#3FB5B5]/20 hover:border-[#3FB5B5]/50 transition-all hover:shadow-xl hover:shadow-[#3FB5B5]/10"
+                >
+                  <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
+                  <p className="text-[#F5F5F7] leading-relaxed mb-6">{project.description}</p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 bg-[#3FB5B5]/20 text-[#3FB5B5] rounded-full text-sm font-medium border border-[#3FB5B5]/30"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                      <Button className="bg-[#3FB5B5] hover:bg-[#3FB5B5]/90 text-[#05060A] font-semibold flex items-center gap-2">
+                        <Github size={18} />
+                        View on GitHub
+                      </Button>
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
-                <div className="flex items-center gap-4">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="bg-[#3FB5B5] hover:bg-[#3FB5B5]/90 text-[#05060A] font-semibold flex items-center gap-2">
-                      <Github size={18} />
-                      View on GitHub
-                    </Button>
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* GitHub Profile Link */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            className="text-center mt-16"
-          >
-            <p className="text-lg text-[#9CA3AF] mb-6">
-              Want to see more? Check out my GitHub profile for additional projects and code samples.
-            </p>
-            <a
-              href="https://github.com/Aaryan9958"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* GitHub Profile Link */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              className="text-center mt-16"
             >
-              <Button className="bg-[#0B0F1A] hover:bg-[#0B0F1A]/80 text-white font-semibold px-8 py-6 text-lg border border-[#3FB5B5]/30 hover:border-[#3FB5B5]/60 flex items-center gap-2 mx-auto">
-                <ExternalLink size={20} />
-                Visit GitHub Profile
-              </Button>
-            </a>
-          </motion.div>
-        </div>
+              <p className="text-lg text-[#9CA3AF] mb-6">
+                Want to see more? Check out my GitHub profile for additional projects and code samples.
+              </p>
+              <a
+                href="https://github.com/Aaryan9958"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-[#0B0F1A] hover:bg-[#0B0F1A]/80 text-white font-semibold px-8 py-6 text-lg border border-[#3FB5B5]/30 hover:border-[#3FB5B5]/60 flex items-center gap-2 mx-auto">
+                  <ExternalLink size={20} />
+                  Visit GitHub Profile
+                </Button>
+              </a>
+            </motion.div>
+          </div>
         </SectionWrapper>
       </div>
     </PageTransition>
