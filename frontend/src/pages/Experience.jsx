@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import BackgroundVideo from '../components/BackgroundVideo';
+import PageTransition from '../components/PageTransition';
 
 const experiences = [
   {
