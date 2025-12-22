@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function CinematicSection({ children, className = '', parallaxLayers = null }) {
   return (
-    <div className={`relative w-full h-screen flex items-center justify-center ${className}`}>
+    <div className={`relative w-full h-screen flex items-center justify-center pt-20 ${className}`}>
       {/* Vignette overlay */}
       <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/60 pointer-events-none z-5" />
       
