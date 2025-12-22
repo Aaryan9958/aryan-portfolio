@@ -202,9 +202,17 @@ export default function Experience() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 10 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute top-16 left-1/2 -translate-x-1/2 w-80 z-30"
+                        className="absolute top-16 z-40"
+                        style={{
+                          // Dynamic positioning to prevent overflow
+                          left: xPosition > 70 ? 'auto' : xPosition < 30 ? '0' : '50%',
+                          right: xPosition > 70 ? '0' : 'auto',
+                          transform: xPosition > 70 ? 'translateX(0)' : xPosition < 30 ? 'translateX(0)' : 'translateX(-50%)',
+                          maxWidth: '420px',
+                          width: 'calc(100vw - 32px)',
+                        }}
                       >
-                        <div className="glass-card rounded-xl p-5 border border-[#2DD4BF]/40 shadow-2xl">
+                        <div className="glass-card rounded-xl p-5 border border-[#2DD4BF]/40 shadow-2xl relative">
                           <div className="mb-3">
                             <h3 className="text-lg font-bold text-white mb-1">
                               {exp.title}
@@ -235,8 +243,15 @@ export default function Experience() {
                             ))}
                           </ul>
 
-                          {/* Arrow pointing to pin */}
-                          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#0a0a0a] border-t border-l border-[#2DD4BF]/40 transform rotate-45" />
+                          {/* Dynamic arrow pointing to pin */}
+                          <div 
+                            className="absolute -top-2 w-4 h-4 bg-[#0a0a0a] border-t border-l border-[#2DD4BF]/40 transform rotate-45"
+                            style={{
+                              left: xPosition > 70 ? 'auto' : xPosition < 30 ? `${xPosition * 420 / 30}px` : '50%',
+                              right: xPosition > 70 ? `${(100 - xPosition) * 420 / 30}px` : 'auto',
+                              transform: xPosition > 70 || xPosition < 30 ? 'rotate(45deg)' : 'translateX(-50%) rotate(45deg)',
+                            }}
+                          />
                         </div>
                       </motion.div>
                     )}
