@@ -1,13 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Elegant handwritten signature with writing animation - "Aryan Bansal"
+// Elegant handwritten signature with letter animation - "Aryan Bansal"
 function NavbarSignature() {
   return (
     <div className="flex items-center relative">
-      {/* Animated stroke version using text */}
       <motion.span
         className="text-[26px] md:text-[30px] text-gray-100"
         style={{ 
@@ -53,13 +52,13 @@ export default function Navigation() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black via-black/95 to-transparent backdrop-blur-xl border-b border-white/5">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-[#0A0A0F] via-[#0A0A0F]/95 to-transparent backdrop-blur-xl border-b border-rose-500/10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Signature Logo */}
           <Link to="/" className="relative group flex items-center">
             <NavbarSignature />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#2DD4BF]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur-xl pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-rose-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur-xl pointer-events-none" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -69,12 +68,12 @@ export default function Navigation() {
                 key={link.path}
                 to={link.path}
                 className={`text-sm font-medium tracking-wide transition-colors relative group ${
-                  isActive(link.path) ? 'text-[#2DD4BF]' : 'text-white/60 hover:text-white'
+                  isActive(link.path) ? 'text-rose-400' : 'text-white/60 hover:text-white'
                 }`}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px bg-gradient-to-r from-[#2DD4BF] to-transparent transition-all ${
+                  className={`absolute -bottom-1 left-0 h-px bg-gradient-to-r from-rose-500 to-pink-500 transition-all ${
                     isActive(link.path) ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}
                 />
@@ -85,7 +84,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white hover:text-[#2DD4BF] transition-colors p-2"
+            className="md:hidden text-white hover:text-rose-400 transition-colors p-2"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -100,7 +99,7 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/95 backdrop-blur-xl border-t border-white/5 overflow-hidden"
+            className="md:hidden bg-[#0A0A0F]/98 backdrop-blur-xl border-t border-rose-500/10 overflow-hidden"
           >
             <div className="px-6 py-4 space-y-4">
               {navLinks.map((link) => (
@@ -109,7 +108,7 @@ export default function Navigation() {
                   to={link.path}
                   onClick={() => setIsOpen(false)}
                   className={`block text-sm font-medium tracking-wide transition-colors ${
-                    isActive(link.path) ? 'text-[#2DD4BF]' : 'text-white/60 hover:text-white'
+                    isActive(link.path) ? 'text-rose-400' : 'text-white/60 hover:text-white'
                   }`}
                 >
                   {link.label}
