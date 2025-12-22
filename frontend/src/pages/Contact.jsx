@@ -67,15 +67,16 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05060A] text-white">
-      <section className="relative min-h-screen pt-32 pb-20 px-6 lg:px-12">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+    <PageTransition>
+      <div className="min-h-screen bg-[#05060A] text-white">
+        <section className="relative min-h-screen pt-32 pb-20 px-6 lg:px-12">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-center mb-16"
+            >
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">Let's Connect</h1>
             <p className="text-xl text-[#9CA3AF]">
               Have a project in mind or just want to chat about data? Drop me a message.
