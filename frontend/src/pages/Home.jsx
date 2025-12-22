@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Database, Code, BarChart3, Brain } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Link } from 'react-router-dom';
 import BackgroundVideo from '../components/BackgroundVideo';
 import Signature from '../components/Signature';
+import PageTransition from '../components/PageTransition';
 import { Button } from '../components/ui/button';
 
 const skillsData = [
