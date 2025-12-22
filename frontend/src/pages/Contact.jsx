@@ -88,7 +88,7 @@ export default function Contact() {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="bg-[#0B0F1A]/80 backdrop-blur-md rounded-xl p-8 border border-[#3FB5B5]/20"
             >
               <h2 className="text-3xl font-bold text-white mb-6">Send a Message</h2>
