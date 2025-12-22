@@ -22,21 +22,25 @@ code {
     font-family: 'Space Grotesk', source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Page container for smooth scrolling */
+/* Page container - no forced height */
 .page-container {
-    scroll-snap-type: y proximity;
-    overflow-y: auto;
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Scroll snap sections - each section acts like a slide */
+/* Scroll snap sections - only for main content */
 .scroll-snap-section {
     scroll-snap-align: start;
+    position: relative;
+}
+
+/* First section can be full height for hero */
+.scroll-snap-section.hero-section {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
 }
 
 /* Smooth scrolling for all elements */
@@ -46,10 +50,6 @@ code {
 
 /* Disable scroll snap on mobile for better experience */
 @media (max-width: 768px) {
-    .page-container {
-        scroll-snap-type: none;
-    }
-    
     .scroll-snap-section {
         scroll-snap-align: none;
         min-height: auto;
