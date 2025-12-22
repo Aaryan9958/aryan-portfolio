@@ -16,7 +16,7 @@ const sectionTransition = {
   ease: 'easeOut',
 };
 
-export default function SectionWrapper({ children, className = '', delay = 0 }) {
+export default function SectionWrapper({ children, className = '', delay = 0, isHero = false }) {
   return (
     <motion.section
       initial="hidden"
@@ -24,7 +24,7 @@ export default function SectionWrapper({ children, className = '', delay = 0 }) 
       viewport={{ once: true, amount: 0.2 }}
       variants={sectionVariants}
       transition={{ ...sectionTransition, delay }}
-      className={`scroll-snap-section ${className}`}
+      className={`scroll-snap-section ${isHero ? 'hero-section' : ''} ${className}`}
     >
       {children}
     </motion.section>
