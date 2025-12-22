@@ -98,7 +98,7 @@ export default function Experience() {
           blur={false}
         />
 
-        <SectionWrapper className="relative pt-32 pb-20 px-6 lg:px-12">
+        <SectionWrapper className="relative pt-32 pb-16 px-6 lg:px-12" isHero={true}>
           <div className="max-w-5xl mx-auto">
             <motion.div
               style={{ opacity: headerOpacity }}
