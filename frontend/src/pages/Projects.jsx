@@ -94,10 +94,10 @@ export default function Projects() {
 
           {/* GitHub Profile Link */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             className="text-center mt-16"
           >
             <p className="text-lg text-[#9CA3AF] mb-6">
