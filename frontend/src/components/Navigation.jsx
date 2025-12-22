@@ -1,22 +1,95 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Elegant handwritten signature for navbar - "Aryan Bansal" in cursive
+// Elegant handwritten signature with writing animation - "Aryan Bansal"
 function NavbarSignature() {
+  const [isAnimated, setIsAnimated] = useState(false);
+  
+  useEffect(() => {
+    setIsAnimated(true);
+  }, []);
+
+  // SVG paths for "Aryan Bansal" - elegant cursive handwriting
+  // Path traced to match the reference signature style
+  const aryanPath = `
+    M 8 58 
+    C 10 52, 14 25, 22 18
+    C 30 11, 36 16, 38 26
+    L 42 48
+    C 44 56, 48 58, 52 54
+    C 54 50, 52 44, 50 40
+    C 48 36, 52 32, 58 34
+    C 64 36, 66 44, 64 50
+    L 62 54
+    C 60 58, 66 52, 72 36
+    C 76 26, 82 24, 86 32
+    C 90 40, 86 54, 80 62
+    C 74 70, 66 72, 62 66
+    C 58 60, 64 52, 74 50
+    L 88 46
+    C 94 44, 100 46, 102 52
+    C 104 58, 100 62, 94 60
+    C 90 58, 94 50, 102 42
+    L 114 34
+    C 120 30, 128 32, 130 40
+    C 132 48, 126 56, 120 56
+    L 136 40
+  `;
+  
+  const bansalPath = `
+    M 152 24
+    L 152 60
+    M 152 36
+    C 158 30, 170 30, 176 38
+    C 182 46, 176 56, 168 58
+    C 160 60, 158 52, 166 46
+    L 184 42
+    C 192 40, 200 44, 200 52
+    C 200 60, 192 62, 186 58
+    L 204 42
+    C 212 34, 222 36, 224 44
+    C 226 52, 218 60, 210 58
+    L 230 44
+    C 238 38, 248 40, 250 48
+    C 252 56, 244 62, 236 60
+    L 256 46
+    C 264 40, 274 42, 276 50
+    C 278 58, 270 64, 262 62
+  `;
+
   return (
-    <div className="flex items-center">
-      <motion.span
-        className="text-2xl md:text-3xl font-signature text-gray-100 tracking-wide"
-        style={{ fontFamily: "'Great Vibes', cursive" }}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        Aryan Bansal
-      </motion.span>
-    </div>
+    <motion.svg
+      viewBox="0 0 290 80"
+      className="h-10 w-[180px] md:h-11 md:w-[200px]"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      {/* "Aryan" */}
+      <motion.path
+        d={aryanPath}
+        fill="none"
+        stroke="#F3F4F6"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: isAnimated ? 1 : 0 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      />
+      {/* "Bansal" */}
+      <motion.path
+        d={bansalPath}
+        fill="none"
+        stroke="#F3F4F6"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: isAnimated ? 1 : 0 }}
+        transition={{ duration: 1.2, ease: "easeInOut", delay: 1.3 }}
+      />
+    </motion.svg>
   );
 }
 
