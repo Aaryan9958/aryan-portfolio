@@ -186,5 +186,6 @@ export default function Experience() {
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }
