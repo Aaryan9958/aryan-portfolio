@@ -117,7 +117,7 @@ export default function CinematicScroll({ children, className = '' }) {
   };
 
   return (
-    <div className={`fixed inset-0 overflow-hidden ${className}`}>
+    <div className={`fixed inset-0 overflow-hidden pt-20 ${className}`}>
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSection}
@@ -130,7 +130,7 @@ export default function CinematicScroll({ children, className = '' }) {
             duration: 0.8,
             ease: [0.43, 0.13, 0.23, 0.96],
           }}
-          className="absolute inset-0"
+          className="absolute inset-0 top-20"
         >
           {sections[currentSection]}
         </motion.div>
@@ -151,8 +151,8 @@ export default function CinematicScroll({ children, className = '' }) {
             }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === currentSection
-                ? 'bg-[#3FB5B5] scale-150'
-                : 'bg-[#9CA3AF] hover:bg-[#F5F5F7]'
+                ? 'bg-[#2DD4BF] scale-150'
+                : 'bg-white/40 hover:bg-white/60'
             }`}
             aria-label={`Go to section ${index + 1}`}
           />
