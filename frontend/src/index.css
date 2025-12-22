@@ -5,6 +5,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -14,24 +15,45 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background: #05060A;
     color: #F5F5F7;
+    overflow-x: hidden;
 }
 
 code {
     font-family: 'Space Grotesk', source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Scroll snap container */
-.scroll-snap-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+/* Page container for smooth scrolling */
+.page-container {
+    scroll-snap-type: y proximity;
+    overflow-y: auto;
     height: 100vh;
 }
 
-/* Scroll snap sections */
+/* Scroll snap sections - each section acts like a slide */
 .scroll-snap-section {
     scroll-snap-align: start;
-    scroll-snap-stop: always;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+/* Smooth scrolling for all elements */
+* {
+    scroll-behavior: smooth;
+}
+
+/* Disable scroll snap on mobile for better experience */
+@media (max-width: 768px) {
+    .page-container {
+        scroll-snap-type: none;
+    }
+    
+    .scroll-snap-section {
+        scroll-snap-align: none;
+        min-height: auto;
+    }
 }
 
 @layer base {
