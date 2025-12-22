@@ -188,7 +188,7 @@ export default function Experience() {
             ))}
           </div>
         </div>
-      </section>
+      </SectionWrapper>
     </div>
     </PageTransition>
   );
