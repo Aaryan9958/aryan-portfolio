@@ -104,7 +104,7 @@ export default function Experience() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-black text-white pt-32 pb-32">
+      <div className="min-h-screen bg-black text-white pt-24 pb-16">
         <BackgroundVideo 
           videoUrl="https://customer-assets.emergentagent.com/job_d6d3bd49-c74e-4d3c-abec-ab44adf6cddc/artifacts/apasc6v1_14683767_3840_2160_30fps.mp4" 
           overlay={true}
@@ -117,9 +117,9 @@ export default function Experience() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-20"
+            className="text-center mb-8"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-3">
               Experience Journey
             </h1>
             <p className="text-xl text-white/60">
@@ -132,8 +132,8 @@ export default function Experience() {
             {/* Vertical Curved Road SVG */}
             <svg
               className="absolute left-1/2 -translate-x-1/2 w-full"
-              style={{ height: '2000px' }}
-              viewBox="0 0 200 2000"
+              style={{ height: '1200px' }}
+              viewBox="0 0 200 1200"
               preserveAspectRatio="xMidYMid meet"
             >
               <defs>
@@ -153,7 +153,7 @@ export default function Experience() {
               
               {/* Vertical curved path */}
               <motion.path
-                d="M 100 50 Q 120 300, 100 550 Q 80 800, 100 1050 Q 120 1300, 100 1550 Q 90 1750, 100 1950"
+                d="M 100 30 Q 120 180, 100 330 Q 80 480, 100 630 Q 120 780, 100 930 Q 90 1050, 100 1170"
                 stroke="url(#roadGradient)"
                 strokeWidth="3"
                 fill="none"
@@ -166,9 +166,9 @@ export default function Experience() {
             </svg>
 
             {/* Experience Pins with Labels and Cards */}
-            <div className="relative" style={{ height: '2000px' }}>
+            <div className="relative" style={{ height: '1200px' }}>
               {experiences.map((exp, index) => {
-                const yPosition = (exp.position.y / 100) * 2000;
+                const yPosition = (exp.position.y / 100) * 1200;
                 const isLeft = exp.position.side === 'left';
 
                 return (
@@ -187,15 +187,15 @@ export default function Experience() {
                           initial={{ opacity: 0, x: 20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.4, delay: 0.1 * index + 0.5 }}
-                          className="absolute right-1/2 pr-12 text-right"
+                          className="absolute right-1/2 pr-8 text-right"
                         >
-                          <p className="text-white font-semibold text-sm md:text-base whitespace-nowrap">
+                          <p className="text-white font-semibold text-sm md:text-base">
                             {exp.title}
                           </p>
-                          <p className="text-[#2DD4BF] text-xs md:text-sm whitespace-nowrap">
+                          <p className="text-[#2DD4BF] text-xs md:text-sm">
                             {exp.company}
                           </p>
-                          <p className="text-white/50 text-xs mt-1 whitespace-nowrap">
+                          <p className="text-white/50 text-xs mt-0.5">
                             {exp.period}
                           </p>
                         </motion.div>
@@ -211,14 +211,14 @@ export default function Experience() {
                         className={`relative group cursor-pointer transition-all z-20`}
                       >
                         <div
-                          className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
+                          className={`w-11 h-11 rounded-full flex items-center justify-center transition-all ${
                             activeId === exp.id
                               ? 'bg-gradient-to-br from-[#2DD4BF] to-[#22D3EE] shadow-xl shadow-[#2DD4BF]/50 scale-110'
                               : 'bg-white/10 border-2 border-[#2DD4BF]/50 hover:border-[#2DD4BF] backdrop-blur-sm hover:scale-105'
                           }`}
                         >
                           <MapPin 
-                            size={24} 
+                            size={22} 
                             className={activeId === exp.id ? 'text-black' : 'text-[#2DD4BF]'}
                           />
                         </div>
@@ -239,15 +239,15 @@ export default function Experience() {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.4, delay: 0.1 * index + 0.5 }}
-                          className="absolute left-1/2 pl-12 text-left"
+                          className="absolute left-1/2 pl-8 text-left"
                         >
-                          <p className="text-white font-semibold text-sm md:text-base whitespace-nowrap">
+                          <p className="text-white font-semibold text-sm md:text-base">
                             {exp.title}
                           </p>
-                          <p className="text-[#2DD4BF] text-xs md:text-sm whitespace-nowrap">
+                          <p className="text-[#2DD4BF] text-xs md:text-sm">
                             {exp.company}
                           </p>
-                          <p className="text-white/50 text-xs mt-1 whitespace-nowrap">
+                          <p className="text-white/50 text-xs mt-0.5">
                             {exp.period}
                           </p>
                         </motion.div>
@@ -261,28 +261,28 @@ export default function Experience() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: -20 }}
                             transition={{ duration: 0.3 }}
-                            className={`absolute top-16 ${
-                              isLeft ? 'right-1/2 mr-16' : 'left-1/2 ml-16'
-                            } w-80 md:w-96 z-30`}
+                            className={`absolute top-12 ${
+                              isLeft ? 'right-1/2 mr-12' : 'left-1/2 ml-12'
+                            } w-72 md:w-80 z-30`}
                           >
-                            <div className="glass-card rounded-xl p-6 border border-[#2DD4BF]/40 shadow-2xl">
-                              <div className="mb-4">
-                                <h3 className="text-xl font-bold text-white mb-2">
+                            <div className="glass-card rounded-xl p-5 border border-[#2DD4BF]/40 shadow-2xl">
+                              <div className="mb-3">
+                                <h3 className="text-lg font-bold text-white mb-1">
                                   {exp.title}
                                 </h3>
-                                <p className="text-[#2DD4BF] font-medium text-base">
+                                <p className="text-[#2DD4BF] font-medium text-sm">
                                   {exp.company}
                                 </p>
-                                <p className="text-white/50 text-sm mt-1">
+                                <p className="text-white/50 text-xs mt-0.5">
                                   {exp.period}
                                 </p>
                               </div>
                               
-                              <ul className="space-y-3">
+                              <ul className="space-y-2">
                                 {exp.highlights.map((highlight, idx) => (
                                   <li
                                     key={idx}
-                                    className="text-white/80 text-sm flex items-start gap-2"
+                                    className="text-white/80 text-xs flex items-start gap-2"
                                   >
                                     <span className="text-[#2DD4BF] mt-1 flex-shrink-0">•</span>
                                     <span>{highlight}</span>
@@ -292,7 +292,7 @@ export default function Experience() {
 
                               {/* Arrow pointing to pin */}
                               <div 
-                                className={`absolute top-6 ${
+                                className={`absolute top-5 ${
                                   isLeft ? '-right-2' : '-left-2'
                                 } w-4 h-4 bg-[#0a0a0a] border ${
                                   isLeft ? 'border-t border-r' : 'border-t border-l'
@@ -312,10 +312,10 @@ export default function Experience() {
           </div>
 
           {/* Timeline Markers */}
-          <div className="mt-16 flex justify-center">
+          <div className="mt-8 flex justify-center">
             <div className="text-center">
               <p className="text-white/40 text-sm">Career Timeline</p>
-              <p className="text-white font-semibold mt-2">2022 → 2025</p>
+              <p className="text-white font-semibold mt-1">2022 → 2025</p>
             </div>
           </div>
         </div>
