@@ -238,7 +238,7 @@ export default function Contact() {
             </motion.div>
           </div>
         </div>
-      </section>
+        </SectionWrapper>
       </div>
     </PageTransition>
   );
