@@ -1,17 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
-const skillsData = [
-  { name: 'SQL', years: 2, futureYears: 3.5 },
-  { name: 'Python', years: 2, futureYears: 4 },
-  { name: 'Tableau', years: 2, futureYears: 3 },
-  { name: 'Analytics', years: 1.5, futureYears: 3.5 },
-  { name: 'A/B Testing', years: 1, futureYears: 2.5 },
-  { name: 'Strategy', years: 3, futureYears: 5 },
-  { name: 'ML/AI', years: 1, futureYears: 3 },
-];
-
-const maxYears = 5;
+// Import JSON data
+import homeData from '../content/home.json';
 
 // Momentum chip component
 function MomentumChip({ delay }) {
@@ -35,7 +26,7 @@ function MomentumChip({ delay }) {
 }
 
 // Single skill bar component
-function SkillBar({ skill, index, isInView, onAnimationComplete }) {
+function SkillBar({ skill, index, isInView, onAnimationComplete, maxYears }) {
   const [showProjection, setShowProjection] = useState(false);
   const [showChips, setShowChips] = useState(false);
   const [projectionComplete, setProjectionComplete] = useState(false);
@@ -46,18 +37,14 @@ function SkillBar({ skill, index, isInView, onAnimationComplete }) {
 
   useEffect(() => {
     if (isInView) {
-      // Start projection after bar animation completes
       const projectionTimer = setTimeout(() => {
         setShowProjection(true);
         setShowChips(true);
       }, (animationDelay + 1) * 1000);
 
-      // Mark projection complete
       const completeTimer = setTimeout(() => {
         setProjectionComplete(true);
-        if (index === skillsData.length - 1) {
-          onAnimationComplete?.();
-        }
+        onAnimationComplete?.();
       }, (animationDelay + 2.5) * 1000);
 
       return () => {
@@ -65,19 +52,16 @@ function SkillBar({ skill, index, isInView, onAnimationComplete }) {
         clearTimeout(completeTimer);
       };
     }
-  }, [isInView, animationDelay, index, onAnimationComplete]);
+  }, [isInView, animationDelay, onAnimationComplete]);
 
   return (
     <div className="flex flex-col items-center gap-3 relative">
-      {/* Bar container */}
       <div 
         className="relative w-12 md:w-14 rounded-t-lg overflow-visible"
         style={{ height: '200px' }}
       >
-        {/* Background track */}
         <div className="absolute bottom-0 left-0 right-0 h-full bg-gradient-to-t from-[#1C2731] to-[#0A1016] rounded-t-lg border border-[#303F4C]/30" />
         
-        {/* Main skill bar */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 skill-bar rounded-t-lg"
           initial={{ height: 0 }}
@@ -89,7 +73,6 @@ function SkillBar({ skill, index, isInView, onAnimationComplete }) {
           }}
         />
 
-        {/* Projection line */}
         <AnimatePresence>
           {showProjection && (
             <motion.div
@@ -108,7 +91,6 @@ function SkillBar({ skill, index, isInView, onAnimationComplete }) {
           )}
         </AnimatePresence>
 
-        {/* Future marker dot */}
         <AnimatePresence>
           {projectionComplete && (
             <motion.div
@@ -123,7 +105,6 @@ function SkillBar({ skill, index, isInView, onAnimationComplete }) {
           )}
         </AnimatePresence>
 
-        {/* Momentum chips */}
         {showChips && (
           <div className="absolute left-1/2 -translate-x-1/2" style={{ bottom: `${barHeight}%` }}>
             {[0, 0.2, 0.4, 0.6].map((delay, i) => (
@@ -132,7 +113,6 @@ function SkillBar({ skill, index, isInView, onAnimationComplete }) {
           </div>
         )}
 
-        {/* Years indicator on bar */}
         <motion.div
           className="absolute left-1/2 -translate-x-1/2 text-xs font-bold text-[#B7CBD7] pointer-events-none"
           style={{ bottom: `calc(${barHeight}% - 24px)` }}
@@ -144,7 +124,6 @@ function SkillBar({ skill, index, isInView, onAnimationComplete }) {
         </motion.div>
       </div>
 
-      {/* Skill label */}
       <motion.span
         className="text-xs md:text-sm font-medium text-[#90AABA] text-center whitespace-nowrap"
         initial={{ opacity: 0, y: 10 }}
@@ -161,9 +140,25 @@ export default function SkillsChart() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const [showMessage, setShowMessage] = useState(false);
+  const [completedBars, setCompletedBars] = useState(0);
+
+  // Get data from JSON with defaults
+  const chartData = homeData?.skillsChart || {};
+  const skillsData = chartData.skills || [];
+  const maxYears = chartData.maxYears || 5;
+  const title = chartData.title || 'Years of Experience';
+  const subtitle = chartData.subtitle || 'Skills developed through hands-on projects';
+  const floatingMessage = chartData.floatingMessage || '';
+  const legend = chartData.legend || { current: 'Current Experience', projection: 'Growth Trajectory' };
 
   const handleAnimationComplete = () => {
-    setTimeout(() => setShowMessage(true), 500);
+    setCompletedBars(prev => {
+      const newCount = prev + 1;
+      if (newCount >= skillsData.length) {
+        setTimeout(() => setShowMessage(true), 500);
+      }
+      return newCount;
+    });
   };
 
   return (
@@ -175,10 +170,10 @@ export default function SkillsChart() {
         className="text-center mb-10"
       >
         <h2 className="text-3xl lg:text-4xl font-bold text-[#B7CBD7] mb-3">
-          Years of Experience
+          {title}
         </h2>
         <p className="text-base text-[#758DA1]">
-          Skills developed through hands-on projects and real-world impact
+          {subtitle}
         </p>
       </motion.div>
 
@@ -186,7 +181,7 @@ export default function SkillsChart() {
       <div className="glass-card rounded-2xl p-6 md:p-8 relative overflow-visible">
         {/* Y-axis labels */}
         <div className="absolute left-2 md:left-4 top-8 bottom-20 flex flex-col justify-between text-xs text-[#5D7386]">
-          {[5, 4, 3, 2, 1, 0].map((year) => (
+          {Array.from({ length: maxYears + 1 }, (_, i) => maxYears - i).map((year) => (
             <span key={year}>{year}y</span>
           ))}
         </div>
@@ -199,14 +194,15 @@ export default function SkillsChart() {
               skill={skill}
               index={index}
               isInView={isInView}
-              onAnimationComplete={index === skillsData.length - 1 ? handleAnimationComplete : undefined}
+              maxYears={maxYears}
+              onAnimationComplete={handleAnimationComplete}
             />
           ))}
         </div>
 
         {/* Floating message */}
         <AnimatePresence>
-          {showMessage && (
+          {showMessage && floatingMessage && (
             <motion.div
               className="absolute -top-16 left-1/2 -translate-x-1/2 text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -214,7 +210,7 @@ export default function SkillsChart() {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <p className="floating-message text-lg md:text-xl font-medium italic whitespace-nowrap">
-                "I am not just experienced, I am growing fast."
+                "{floatingMessage}"
               </p>
             </motion.div>
           )}
@@ -229,11 +225,11 @@ export default function SkillsChart() {
         >
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded skill-bar" />
-            <span className="text-[#758DA1]">Current Experience</span>
+            <span className="text-[#758DA1]">{legend.current}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-0.5 projection-line" />
-            <span className="text-[#758DA1]">Growth Trajectory</span>
+            <span className="text-[#758DA1]">{legend.projection}</span>
           </div>
         </motion.div>
       </div>
