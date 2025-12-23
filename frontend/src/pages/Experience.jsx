@@ -4,60 +4,8 @@ import { MapPin, X } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
 
-const experiences = [
-  {
-    id: 1,
-    title: 'Business Analyst Intern',
-    company: 'Foodizo',
-    period: 'Jun 2022',
-    endYear: '2022',
-    description: 'Food-tech startup aggregating home-cooked meals.',
-    highlights: [
-      'Built competitor-based pricing model that increased pilot orders by ~25%',
-      'Used TAM/SAM/SOM segmentation to focus on high-potential segments and reduce acquisition costs',
-    ],
-    position: { x: 12 },
-  },
-  {
-    id: 2,
-    title: 'Market Analyst Intern',
-    company: 'Lenskart',
-    period: 'Mar 2023',
-    endYear: '2023',
-    highlights: [
-      'Analyzed 5+ digital campaigns and improved post performance by ~15%',
-      'Helped drive ~500K impressions and 10K audience growth',
-      'Used dashboards and campaign metrics to refine influencer and media strategy',
-    ],
-    position: { x: 37 },
-  },
-  {
-    id: 3,
-    title: 'Strategy Analyst',
-    company: 'Daily Grind (Student Venture)',
-    period: 'Aug 2023',
-    endYear: '2023',
-    highlights: [
-      'Co-founded a four-flavor on-campus coffee venture',
-      'Managed pricing, inventory (JIT/FIFO), and promotions, maintaining ~20% profit margin',
-      'Used customer feedback and simple A/B tests to decide flavors and offers',
-    ],
-    position: { x: 62 },
-  },
-  {
-    id: 4,
-    title: 'Marketing Strategy Consultant',
-    company: 'iDig2Learn',
-    period: 'Feb 2024',
-    endYear: '2024',
-    highlights: [
-      'Consulted for a non-profit focused on environmental education',
-      'Analyzed engagement and donor patterns across channels',
-      'Recommended content themes and timing to grow reach and improve donor conversion',
-    ],
-    position: { x: 88 },
-  },
-];
+// Import JSON data
+import experienceData from '../content/experience.json';
 
 function ExperienceModal({ experience, onClose }) {
   if (!experience) return null;
@@ -91,33 +39,48 @@ function ExperienceModal({ experience, onClose }) {
         <div className="pr-8">
           <div className="mb-4">
             <h3 className="text-xl md:text-2xl font-bold text-[#B7CBD7] mb-2">
-              {experience.title}
+              {experience.role}
             </h3>
             <p className="text-[#90AABA] font-medium">
               {experience.company}
             </p>
             <p className="text-[#5D7386] text-sm mt-1">
-              {experience.period}
+              {experience.displayPeriod} {experience.location && `• ${experience.location}`}
             </p>
           </div>
           
-          {experience.description && (
+          {experience.summary && (
             <p className="text-[#758DA1] text-sm mb-4 italic border-l-2 border-[#465969] pl-3">
-              {experience.description}
+              {experience.summary}
             </p>
           )}
           
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-[#90AABA] uppercase tracking-wider">Key Achievements</h4>
-            <ul className="space-y-3">
-              {experience.highlights.map((highlight, idx) => (
-                <li key={idx} className="text-[#758DA1] text-sm flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#90AABA] mt-2 flex-shrink-0" />
-                  <span>{highlight}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {experience.highlights && experience.highlights.length > 0 && (
+            <div className="space-y-3">
+              <h4 className="text-sm font-semibold text-[#90AABA] uppercase tracking-wider">Key Achievements</h4>
+              <ul className="space-y-3">
+                {experience.highlights.map((highlight, idx) => (
+                  <li key={idx} className="text-[#758DA1] text-sm flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#90AABA] mt-2 flex-shrink-0" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {experience.techStack && experience.techStack.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-[#303F4C]">
+              <h4 className="text-xs font-semibold text-[#5D7386] uppercase tracking-wider mb-2">Skills Used</h4>
+              <div className="flex flex-wrap gap-2">
+                {experience.techStack.map((tech, idx) => (
+                  <span key={idx} className="tag text-xs">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -167,7 +130,7 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
             className="text-center"
             style={{ 
               position: 'absolute',
-              left: `${exp.position.x}%`,
+              left: `${exp.position?.x || (10 + index * 25)}%`,
               transform: 'translateX(-50%)'
             }}
           >
@@ -177,14 +140,14 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
               transition={{ delay: 0.3 + index * 0.15 }}
               className="text-xs text-[#90AABA]/80 font-medium"
             >
-              {exp.endYear}
+              {exp.displayYear}
             </motion.span>
           </div>
         ))}
       </div>
 
       {experiences.map((exp, index) => {
-        const xPosition = exp.position.x;
+        const xPosition = exp.position?.x || (10 + index * 25);
         const yPosition = index % 2 === 0 ? 48 : 52;
 
         return (
@@ -204,7 +167,7 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
               className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center w-max max-w-[160px]"
             >
               <p className="text-[#B7CBD7] font-semibold text-sm leading-tight">
-                {exp.title}
+                {exp.role}
               </p>
               <p className="text-[#90AABA] text-xs mt-0.5">
                 {exp.company}
@@ -263,11 +226,11 @@ function MobileRoadmap({ experiences, activeId, onPinClick }) {
 
       <div className="absolute top-0 left-1/2 -translate-x-1/2 text-center">
         <span className="text-xs text-[#5D7386]">Current</span>
-        <p className="text-[#90AABA] font-semibold">2024</p>
+        <p className="text-[#90AABA] font-semibold">{experienceData.timeline?.endYear || 2024}</p>
       </div>
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center">
         <span className="text-xs text-[#5D7386]">Start</span>
-        <p className="text-[#90AABA] font-semibold">2022</p>
+        <p className="text-[#90AABA] font-semibold">{experienceData.timeline?.startYear || 2022}</p>
       </div>
 
       <div className="pt-16 pb-16 space-y-16">
@@ -284,13 +247,13 @@ function MobileRoadmap({ experiences, activeId, onPinClick }) {
             >
               <div className={`w-[45%] ${isLeft ? 'mr-auto pr-4 text-right' : 'ml-auto pl-4 text-left'}`}>
                 <p className="text-[#B7CBD7] font-semibold text-sm leading-tight">
-                  {exp.title}
+                  {exp.role}
                 </p>
                 <p className="text-[#90AABA] text-xs mt-0.5">
                   {exp.company}
                 </p>
                 <p className="text-[#5D7386] text-xs mt-0.5">
-                  {exp.period}
+                  {exp.displayPeriod}
                 </p>
               </div>
 
@@ -316,6 +279,13 @@ function MobileRoadmap({ experiences, activeId, onPinClick }) {
 
 export default function Experience() {
   const [activeId, setActiveId] = useState(null);
+  
+  // Get experiences from JSON, sorted by order
+  const experiences = (experienceData.experiences || [])
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
+  
+  const timeline = experienceData.timeline || {};
+  
   const activeExperience = experiences.find(exp => exp.id === activeId);
 
   useEffect(() => {
@@ -333,7 +303,6 @@ export default function Experience() {
   return (
     <PageTransition>
       <div className="min-h-screen text-white relative overflow-x-hidden">
-        {/* Metallic background */}
         <div 
           className="fixed inset-0 z-0"
           style={{
@@ -341,7 +310,6 @@ export default function Experience() {
           }}
         />
         
-        {/* Texture overlay */}
         <div 
           className="fixed inset-0 z-0 opacity-[0.03]"
           style={{
@@ -352,7 +320,6 @@ export default function Experience() {
           }}
         />
         
-        {/* Ambient glow */}
         <div 
           className="fixed inset-0 z-0"
           style={{
@@ -389,12 +356,12 @@ export default function Experience() {
 
             <div className="hidden md:flex justify-between items-center max-w-[1100px] mx-auto px-8 mt-4">
               <div className="text-left">
-                <p className="text-[#5D7386] text-xs">Start</p>
-                <p className="text-[#90AABA] font-semibold text-sm mt-0.5">2022</p>
+                <p className="text-[#5D7386] text-xs">{timeline.startLabel || 'Start'}</p>
+                <p className="text-[#90AABA] font-semibold text-sm mt-0.5">{timeline.startYear || 2022}</p>
               </div>
               <div className="text-right">
-                <p className="text-[#5D7386] text-xs">Current</p>
-                <p className="text-[#90AABA] font-semibold text-sm mt-0.5">2024</p>
+                <p className="text-[#5D7386] text-xs">{timeline.endLabel || 'Current'}</p>
+                <p className="text-[#90AABA] font-semibold text-sm mt-0.5">{timeline.endYear || 2024}</p>
               </div>
             </div>
           </div>
