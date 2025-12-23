@@ -5,31 +5,12 @@ export default function CinematicScroll({ children, className = '' }) {
   const [currentSection, setCurrentSection] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [direction, setDirection] = useState(0);
-  const [canScrollSection, setCanScrollSection] = useState({ up: false, down: true });
   const contentRef = useRef(null);
   const touchStartY = useRef(0);
-  const lastScrollTop = useRef(0);
 
   const sections = Array.isArray(children) ? children : [children];
   const totalSections = sections.length;
   const isLastSection = currentSection === totalSections - 1;
-
-  // Check if content is scrollable and at boundaries
-  const checkScrollBoundaries = useCallback(() => {
-    const content = contentRef.current;
-    if (!content) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = content;
-    const isAtTop = scrollTop <= 5;
-    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
-    
-    setCanScrollSection({
-      up: isAtTop && currentSection > 0,
-      down: isAtBottom && currentSection < totalSections - 1,
-    });
-    
-    lastScrollTop.current = scrollTop;
-  }, [currentSection, totalSections]);
 
   // Handle wheel events for section transitions
   useEffect(() => {
@@ -54,7 +35,6 @@ export default function CinematicScroll({ children, className = '' }) {
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        // Scroll down - go to next section
         if (accumulatedDelta > DELTA_THRESHOLD && isAtBottom && currentSection < totalSections - 1) {
           e.preventDefault();
           setDirection(1);
@@ -65,7 +45,6 @@ export default function CinematicScroll({ children, className = '' }) {
             if (contentRef.current) contentRef.current.scrollTop = 0;
           }, 800);
         }
-        // Scroll up - go to previous section
         else if (accumulatedDelta < -DELTA_THRESHOLD && isAtTop && currentSection > 0) {
           e.preventDefault();
           setDirection(-1);
@@ -163,45 +142,42 @@ export default function CinematicScroll({ children, className = '' }) {
     };
   }, [currentSection, isTransitioning, totalSections]);
 
-  // Check boundaries on scroll
-  useEffect(() => {
-    const content = contentRef.current;
-    if (!content) return;
-
-    content.addEventListener('scroll', checkScrollBoundaries);
-    checkScrollBoundaries();
-
-    return () => content.removeEventListener('scroll', checkScrollBoundaries);
-  }, [checkScrollBoundaries, currentSection]);
-
   const sectionVariants = {
     enter: (direction) => ({
       opacity: 0,
       scale: 0.95,
-      y: direction > 0 ? 60 : -60,
+      x: direction > 0 ? 60 : -60,
       filter: 'blur(10px)',
     }),
     center: {
       opacity: 1,
       scale: 1,
-      y: 0,
+      x: 0,
       filter: 'blur(0px)',
     },
     exit: (direction) => ({
       opacity: 0,
       scale: 1.02,
-      y: direction > 0 ? -60 : 60,
+      x: direction > 0 ? -60 : 60,
       filter: 'blur(10px)',
     }),
   };
 
   return (
     <div className={`fixed inset-0 overflow-hidden ${className}`}>
-      {/* Background with vignette */}
+      {/* Metallic background gradient */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at center, #12080C 0%, #0A0A0F 50%, #050508 100%)',
+          background: 'linear-gradient(180deg, #0A1016 0%, #1C2731 50%, #0A1016 100%)',
+        }}
+      />
+      
+      {/* Subtle magenta ambient */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at 30% 30%, rgba(255, 51, 102, 0.02) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(144, 170, 186, 0.03) 0%, transparent 50%)',
         }}
       />
       
@@ -224,7 +200,7 @@ export default function CinematicScroll({ children, className = '' }) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Section indicators - Red/Magenta theme */}
+      {/* Section indicators - Metallic theme */}
       <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
         {sections.map((_, index) => (
           <button
@@ -242,29 +218,29 @@ export default function CinematicScroll({ children, className = '' }) {
             }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === currentSection
-                ? 'bg-rose-500 scale-150 shadow-lg shadow-rose-500/50'
-                : 'bg-white/40 hover:bg-white/60'
+                ? 'bg-[#B7CBD7] scale-150 shadow-lg shadow-[#90AABA]/50'
+                : 'bg-[#465969] hover:bg-[#5D7386]'
             }`}
             aria-label={`Go to section ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Scroll indicator for current section */}
+      {/* Scroll indicator */}
       {!isLastSection && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-white/40 uppercase tracking-wider">Scroll</span>
+          <span className="text-xs text-[#5D7386] uppercase tracking-wider">Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-5 h-8 rounded-full border border-rose-500/30 flex items-start justify-center p-1"
+            className="w-5 h-8 rounded-full border border-[#465969] flex items-start justify-center p-1"
           >
             <motion.div 
-              className="w-1 h-2 bg-rose-500/60 rounded-full"
+              className="w-1 h-2 bg-[#90AABA]/60 rounded-full"
               animate={{ opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             />
