@@ -1,0 +1,34 @@
+{
+  "siteName": "Aryan Bansal Portfolio",
+  "siteDescription": "Business Analytics Professional | SQL, Python, Tableau | Turning data into decisions",
+  "navigation": [
+    { "path": "/", "label": "Home" },
+    { "path": "/experience", "label": "Experience" },
+    { "path": "/projects", "label": "Projects" },
+    { "path": "/contact", "label": "Contact" }
+  ],
+  "preloader": {
+    "enabled": true,
+    "duration": 5000,
+    "respectReducedMotion": true,
+    "keywords": [
+      "SQL", "Python", "R", "Analytics", "A/B Testing",
+      "Causal Inference", "Dashboards", "Tableau", "Power BI",
+      "Machine Learning", "Data Science", "Segmentation",
+      "KPI", "ROI", "Regression", "Forecasting", "ETL",
+      "Business Intelligence", "Statistics", "Visualization"
+    ]
+  },
+  "theme": {
+    "palette": {
+      "charcoal": "#0A1016",
+      "steelDark": "#1C2731",
+      "steelMedium": "#303F4C",
+      "greyBlue": "#465969",
+      "metalBlue": "#5D7386",
+      "metallicGrey": "#758DA1",
+      "silverBlue": "#90AABA",
+      "frost": "#B7CBD7"
+    }
+  }
+}

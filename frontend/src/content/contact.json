@@ -1,0 +1,70 @@
+{
+  "pageTitle": "Let's Connect",
+  "pageSubtitle": "Have a project in mind or just want to chat about data? Drop me a message.",
+  "form": {
+    "title": "Send a Message",
+    "endpoint": "https://formspree.io/f/mykgpqkv",
+    "fields": [
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text",
+        "placeholder": "Your name",
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "placeholder": "your.email@example.com",
+        "required": true
+      },
+      {
+        "name": "company",
+        "label": "Company (Optional)",
+        "type": "text",
+        "placeholder": "Your company",
+        "required": false
+      },
+      {
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "placeholder": "Tell me about your project or inquiry...",
+        "required": true,
+        "rows": 5
+      }
+    ],
+    "submitButton": "Send Message",
+    "successMessage": "Message sent successfully! I'll get back to you soon.",
+    "errorMessage": "Failed to send. Please try again or email directly."
+  },
+  "connectSection": {
+    "title": "Connect With Me",
+    "description": "I'm always open to discussing new opportunities, collaborations, or just having a conversation about data analytics and business strategy.",
+    "socialLinks": [
+      {
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/aryan-bansal9/",
+        "subtitle": "Connect professionally",
+        "icon": "Linkedin"
+      },
+      {
+        "platform": "GitHub",
+        "url": "https://github.com/Aaryan9958",
+        "subtitle": "View my code",
+        "icon": "Github"
+      },
+      {
+        "platform": "Email",
+        "url": "mailto:aryan.bansal@simon.rochester.edu",
+        "subtitle": "aryan.bansal@simon.rochester.edu",
+        "icon": "Mail"
+      }
+    ]
+  },
+  "opportunityCard": {
+    "title": "Currently Seeking Opportunities",
+    "description": "I'm actively looking for full-time Business Analyst and Data Analyst roles starting December 2025. If you're hiring or know someone who is, I'd love to connect!"
+  }
+}

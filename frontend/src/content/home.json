@@ -1,0 +1,155 @@
+{
+  "hero": {
+    "name": "Aryan Bansal",
+    "headline": "Turning data into decisions.",
+    "subheadline": "Business Analyst | SQL | Python | Tableau",
+    "bio": "Ever feel like your data is trying to tell you something? I do. With SQL, Python, and a strong cup of coffee, I dive into messy datasets to find the 'aha!' moments that help teams make smarter moves.",
+    "education": {
+      "degree": "MS in Business Analytics",
+      "school": "Simon Business School",
+      "graduationDate": "Dec 2025",
+      "highlights": ["Merit Scholarship", "Advanced Certificate in AI (In Progress)"]
+    },
+    "ctaButton": {
+      "text": "Get in Touch",
+      "link": "/contact"
+    }
+  },
+  "media": {
+    "headshot": "https://customer-assets.emergentagent.com/job_d6d3bd49-c74e-4d3c-abec-ab44adf6cddc/artifacts/g8lohof5_image.png",
+    "headshotAlt": "Aryan Bansal - Business Analytics Professional",
+    "heroVideo": "",
+    "backgroundPattern": ""
+  },
+  "kpiCards": [
+    {
+      "id": "projects",
+      "label": "Projects Completed",
+      "value": 4,
+      "suffix": "+",
+      "description": "End-to-end analytics & experimentation work",
+      "icon": "Briefcase"
+    },
+    {
+      "id": "datapoints",
+      "label": "Data Points Analyzed",
+      "value": 500,
+      "suffix": "K+",
+      "description": "Across various datasets and industries",
+      "icon": "Target"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue Impact",
+      "value": 25,
+      "suffix": "%",
+      "description": "Average improvement in key metrics",
+      "icon": "TrendingUp"
+    },
+    {
+      "id": "team",
+      "label": "Team Members Led",
+      "value": 25,
+      "suffix": "",
+      "description": "Cross-functional team leadership",
+      "icon": "Users"
+    }
+  ],
+  "skillsChart": {
+    "title": "Years of Experience",
+    "subtitle": "Skills developed through hands-on projects and real-world impact",
+    "maxYears": 5,
+    "floatingMessage": "I am not just experienced, I am growing fast.",
+    "legend": {
+      "current": "Current Experience",
+      "projection": "Growth Trajectory"
+    },
+    "skills": [
+      { "name": "SQL", "years": 2, "futureYears": 3.5 },
+      { "name": "Python", "years": 2, "futureYears": 4 },
+      { "name": "Tableau", "years": 2, "futureYears": 3 },
+      { "name": "Analytics", "years": 1.5, "futureYears": 3.5 },
+      { "name": "A/B Testing", "years": 1, "futureYears": 2.5 },
+      { "name": "Strategy", "years": 3, "futureYears": 5 },
+      { "name": "ML/AI", "years": 1, "futureYears": 3 }
+    ]
+  },
+  "skillCategories": [
+    {
+      "id": "analytics",
+      "title": "Analytics",
+      "icon": "Brain",
+      "skills": [
+        "Predictive Analytics",
+        "Causal Inference",
+        "Segmentation (PCA, K-Means)",
+        "A/B Testing & Experimentation",
+        "Time-Series Analysis"
+      ]
+    },
+    {
+      "id": "programming",
+      "title": "Programming & Tools",
+      "icon": "Code",
+      "skills": [
+        "Python",
+        "SQL",
+        "R",
+        "Tableau",
+        "Power BI",
+        "Excel (Advanced)"
+      ]
+    },
+    {
+      "id": "business",
+      "title": "Business & Strategy",
+      "icon": "BarChart3",
+      "skills": [
+        "Market Analysis",
+        "Pricing Strategy",
+        "KPI Reporting",
+        "Customer Segmentation",
+        "Dashboarding"
+      ]
+    },
+    {
+      "id": "soft-skills",
+      "title": "Soft Skills",
+      "icon": "Database",
+      "skills": [
+        "Client Communication",
+        "Consulting Storytelling",
+        "Team Collaboration",
+        "Leadership (25-member team management)"
+      ]
+    }
+  ],
+  "slides": {
+    "backgrounds": {
+      "hero": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&q=80",
+      "skills": "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1920&q=80",
+      "categories": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80"
+    }
+  },
+  "footer": {
+    "name": "Aryan Bansal",
+    "title": "Business Analytics Professional",
+    "socialLinks": [
+      {
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/aryan-bansal9/",
+        "icon": "Linkedin"
+      },
+      {
+        "platform": "GitHub",
+        "url": "https://github.com/Aaryan9958",
+        "icon": "Github"
+      },
+      {
+        "platform": "Email",
+        "url": "mailto:aryan.bansal@simon.rochester.edu",
+        "icon": "Mail"
+      }
+    ]
+  }
+}
