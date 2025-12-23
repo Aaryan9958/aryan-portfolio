@@ -1,6 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SITE_CONFIG } from '../config/siteConfig';
+
+// Pre-generate random values for keywords
+const generateKeywordData = () => keywords.map((text, index) => ({
+  text,
+  randomX: (index * 17 + 23) % 80 + 10, // Deterministic but varied
+  randomY: (index * 31 + 47) % 80 + 10,
+  randomDuration: (index * 7 % 10) + 15,
+  randomOffsetX: (index * 13 % 20) - 10,
+  randomOffsetY: (index * 19 % 20) - 10,
+}));
 
 // Floating keywords for the loading animation
 const keywords = [
@@ -11,10 +21,8 @@ const keywords = [
   'Business Intelligence', 'Statistics', 'Visualization'
 ];
 
-function FloatingKeyword({ text, delay, reducedMotion }) {
-  const randomX = Math.random() * 80 + 10; // 10-90%
-  const randomY = Math.random() * 80 + 10; // 10-90%
-  const randomDuration = Math.random() * 10 + 15; // 15-25s
+function FloatingKeyword({ data, delay, reducedMotion }) {
+  const { text, randomX, randomY, randomDuration, randomOffsetX, randomOffsetY } = data;
   
   if (reducedMotion) {
     return (
@@ -40,8 +48,8 @@ function FloatingKeyword({ text, delay, reducedMotion }) {
       }}
       animate={{ 
         opacity: [0, 0.3, 0.3, 0],
-        x: [`${randomX}vw`, `${randomX + (Math.random() - 0.5) * 20}vw`],
-        y: [`${randomY}vh`, `${randomY + (Math.random() - 0.5) * 20}vh`],
+        x: [`${randomX}vw`, `${randomX + randomOffsetX}vw`],
+        y: [`${randomY}vh`, `${randomY + randomOffsetY}vh`],
       }}
       transition={{
         duration: randomDuration,
