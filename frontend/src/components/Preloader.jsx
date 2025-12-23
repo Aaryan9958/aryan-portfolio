@@ -5,14 +5,13 @@ import { SITE_CONFIG } from '../config/siteConfig';
 // Pre-generate random values for keywords
 const generateKeywordData = () => keywords.map((text, index) => ({
   text,
-  randomX: (index * 17 + 23) % 80 + 10, // Deterministic but varied
+  randomX: (index * 17 + 23) % 80 + 10,
   randomY: (index * 31 + 47) % 80 + 10,
   randomDuration: (index * 7 % 10) + 15,
   randomOffsetX: (index * 13 % 20) - 10,
   randomOffsetY: (index * 19 % 20) - 10,
 }));
 
-// Floating keywords for the loading animation
 const keywords = [
   'SQL', 'Python', 'R', 'Analytics', 'A/B Testing', 
   'Causal Inference', 'Dashboards', 'Tableau', 'Power BI',
@@ -27,7 +26,7 @@ function FloatingKeyword({ data, delay, reducedMotion }) {
   if (reducedMotion) {
     return (
       <div
-        className="absolute text-rose-500/20 text-sm md:text-base font-medium whitespace-nowrap"
+        className="absolute text-[#465969]/30 text-sm md:text-base font-medium whitespace-nowrap"
         style={{
           left: `${randomX}%`,
           top: `${randomY}%`,
@@ -40,14 +39,14 @@ function FloatingKeyword({ data, delay, reducedMotion }) {
   
   return (
     <motion.div
-      className="absolute text-rose-500/20 text-sm md:text-base font-medium whitespace-nowrap"
+      className="absolute text-[#465969]/30 text-sm md:text-base font-medium whitespace-nowrap"
       initial={{ 
         opacity: 0,
         x: `${randomX}vw`,
         y: `${randomY}vh`,
       }}
       animate={{ 
-        opacity: [0, 0.3, 0.3, 0],
+        opacity: [0, 0.4, 0.4, 0],
         x: [`${randomX}vw`, `${randomX + randomOffsetX}vw`],
         y: [`${randomY}vh`, `${randomY + randomOffsetY}vh`],
       }}
@@ -68,11 +67,9 @@ export default function Preloader({ onComplete }) {
   const [isComplete, setIsComplete] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  // Pre-generate keyword data to avoid Math.random during render
   const keywordData = useMemo(() => generateKeywordData(), []);
 
   useEffect(() => {
-    // Check for reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mediaQuery.matches && SITE_CONFIG.RESPECT_REDUCED_MOTION);
     
@@ -85,7 +82,6 @@ export default function Preloader({ onComplete }) {
   }, []);
 
   useEffect(() => {
-    // Shorter duration for reduced motion
     const duration = reducedMotion ? 1500 : SITE_CONFIG.PRELOADER_DURATION;
     const startTime = Date.now();
     
@@ -116,14 +112,14 @@ export default function Preloader({ onComplete }) {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
           style={{
-            background: 'radial-gradient(ellipse at center, #1a0a15 0%, #0a0a0f 50%, #050508 100%)',
+            background: 'linear-gradient(180deg, #0A1016 0%, #1C2731 50%, #0A1016 100%)',
           }}
         >
-          {/* Red/magenta vignette overlay */}
+          {/* Metallic ambient glow */}
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(circle at 30% 30%, rgba(225, 29, 72, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(236, 72, 153, 0.08) 0%, transparent 50%)',
+              background: 'radial-gradient(circle at 30% 30%, rgba(144, 170, 186, 0.05) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255, 51, 102, 0.03) 0%, transparent 50%)',
             }}
           />
           
@@ -151,12 +147,15 @@ export default function Preloader({ onComplete }) {
               className="text-center"
             >
               <h1 
-                className="text-4xl md:text-5xl text-white/90 mb-2"
-                style={{ fontFamily: "'Great Vibes', cursive" }}
+                className="text-4xl md:text-5xl text-[#B7CBD7] mb-2"
+                style={{ 
+                  fontFamily: "'Great Vibes', cursive",
+                  textShadow: '0 0 40px rgba(144, 170, 186, 0.3)'
+                }}
               >
                 Aryan Bansal
               </h1>
-              <p className="text-rose-400/60 text-sm tracking-widest uppercase">
+              <p className="text-[#5D7386] text-sm tracking-widest uppercase">
                 Business Analytics
               </p>
             </motion.div>
@@ -164,12 +163,12 @@ export default function Preloader({ onComplete }) {
             {/* Progress bar container */}
             <div className="w-64 md:w-80">
               {/* Progress bar background */}
-              <div className="h-1 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
+              <div className="h-1 bg-[#1C2731] rounded-full overflow-hidden border border-[#303F4C]/30">
                 {/* Progress bar fill */}
                 <motion.div
                   className="h-full rounded-full"
                   style={{
-                    background: 'linear-gradient(90deg, #E11D48, #EC4899, #E11D48)',
+                    background: 'linear-gradient(90deg, #465969, #5D7386, #90AABA, #5D7386, #465969)',
                     backgroundSize: '200% 100%',
                   }}
                   initial={{ width: 0 }}
@@ -186,8 +185,8 @@ export default function Preloader({ onComplete }) {
               
               {/* Progress percentage */}
               <div className="flex justify-between mt-3">
-                <span className="text-xs text-white/40">Loading</span>
-                <span className="text-xs text-rose-400/80 font-mono">
+                <span className="text-xs text-[#465969]">Loading</span>
+                <span className="text-xs text-[#90AABA] font-mono">
                   {Math.round(progress)}%
                 </span>
               </div>
@@ -195,8 +194,8 @@ export default function Preloader({ onComplete }) {
           </div>
           
           {/* Glow effects */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-rose-500/10 blur-[100px] rounded-full" />
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-pink-500/5 blur-[80px] rounded-full" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-[#5D7386]/10 blur-[100px] rounded-full" />
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#90AABA]/5 blur-[80px] rounded-full" />
         </motion.div>
       )}
     </AnimatePresence>
