@@ -28,12 +28,9 @@ function AnimatedRoutes() {
 
 function App() {
   // Check if this is first visit in this session
-  const [hasShownPreloader] = useState(() => {
-    const shown = sessionStorage.getItem('preloaderShown');
-    return shown === 'true';
-  });
-  
+  const hasShownPreloader = sessionStorage.getItem('preloaderShown') === 'true';
   const shouldShowPreloader = SITE_CONFIG.ENABLE_PRELOADER && !hasShownPreloader;
+  
   const [showPreloader, setShowPreloader] = useState(shouldShowPreloader);
   const [appReady, setAppReady] = useState(!shouldShowPreloader);
 
@@ -42,13 +39,6 @@ function App() {
     setShowPreloader(false);
     setAppReady(true);
   };
-
-  // If preloader is disabled or already shown, app is immediately ready
-  useEffect(() => {
-    if (!shouldShowPreloader) {
-      setAppReady(true);
-    }
-  }, [shouldShowPreloader]);
 
   return (
     <div className="App">
