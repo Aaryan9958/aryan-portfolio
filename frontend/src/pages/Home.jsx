@@ -10,40 +10,19 @@ import SkillsChart from '../components/SkillsChart';
 import Footer from '../components/Footer';
 import { Button } from '../components/ui/button';
 
-const skillCategories = [
-  {
-    title: 'Analytics',
-    icon: Brain,
-    skills: ['Predictive Analytics', 'Causal Inference', 'Segmentation (PCA, K-Means)', 'A/B Testing & Experimentation', 'Time-Series Analysis'],
-  },
-  {
-    title: 'Programming & Tools',
-    icon: Code,
-    skills: ['Python', 'SQL', 'R', 'Tableau', 'Power BI', 'Excel (Advanced)'],
-  },
-  {
-    title: 'Business & Strategy',
-    icon: BarChart3,
-    skills: ['Market Analysis', 'Pricing Strategy', 'KPI Reporting', 'Customer Segmentation', 'Dashboarding'],
-  },
-  {
-    title: 'Soft Skills',
-    icon: Database,
-    skills: ['Client Communication', 'Consulting Storytelling', 'Team Collaboration', 'Leadership (25-member team management)'],
-  },
-];
+// Import JSON data
+import homeData from '../content/home.json';
 
-const metrics = [
-  { value: 4, label: 'Projects Completed', icon: Briefcase, suffix: '+' },
-  { value: 500, label: 'Data Points Analyzed', icon: Target, suffix: 'K+' },
-  { value: 25, label: 'Revenue Impact', icon: TrendingUp, suffix: '%' },
-  { value: 25, label: 'Team Members Led', icon: Users, suffix: '' },
-];
-
-const slideBackgrounds = {
-  hero: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&q=80',
-  skills: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1920&q=80',
-  categories: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80',
+// Icon mapping for dynamic icon rendering
+const iconMap = {
+  Briefcase,
+  Target,
+  TrendingUp,
+  Users,
+  Brain,
+  Code,
+  BarChart3,
+  Database,
 };
 
 export default function Home() {
@@ -51,11 +30,26 @@ export default function Home() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Destructure data from JSON with defaults
+  const { hero, media, kpiCards, skillCategories, slides } = homeData;
+  
+  // Map KPI cards with icons
+  const metricsWithIcons = kpiCards?.map(card => ({
+    ...card,
+    icon: iconMap[card.icon] || Briefcase,
+  })) || [];
+
+  // Map skill categories with icons
+  const categoriesWithIcons = skillCategories?.map(category => ({
+    ...category,
+    icon: iconMap[category.icon] || Brain,
+  })) || [];
+
   return (
     <PageTransition>
       <CinematicScroll>
         {/* Hero Section */}
-        <CinematicSection backgroundImage={slideBackgrounds.hero}>
+        <CinematicSection backgroundImage={slides?.backgrounds?.hero}>
           <div className="flex flex-col items-center justify-center min-h-[80vh]">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto">
               {/* Left: Headshot with metallic frame */}
@@ -73,8 +67,8 @@ export default function Home() {
                   <div className="relative p-1 rounded-2xl bg-gradient-to-br from-[#465969] via-[#5D7386] to-[#465969]">
                     <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-xl overflow-hidden bg-[#1C2731]">
                       <img
-                        src="https://customer-assets.emergentagent.com/job_d6d3bd49-c74e-4d3c-abec-ab44adf6cddc/artifacts/g8lohof5_image.png"
-                        alt="Aryan Bansal"
+                        src={media?.headshot || ''}
+                        alt={media?.headshotAlt || hero?.name || 'Profile Photo'}
                         className="w-full h-full object-cover"
                       />
                       {/* Metallic overlay */}
@@ -99,10 +93,10 @@ export default function Home() {
                   className="space-y-3"
                 >
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#B7CBD7] leading-tight">
-                    Aryan Bansal
+                    {hero?.name || 'Name'}
                   </h1>
                   <p className="text-lg md:text-xl text-[#90AABA] font-medium">
-                    Business Analyst | SQL | Python | Tableau | Turning data into decisions.
+                    {hero?.subheadline || ''} | {hero?.headline || ''}
                   </p>
                 </motion.div>
 
@@ -113,10 +107,10 @@ export default function Home() {
                   className="glass-card rounded-xl p-5"
                 >
                   <p className="text-base text-[#B7CBD7] leading-relaxed">
-                    <span className="font-semibold">MS in Business Analytics</span>, Simon Business School (Dec 2025)
+                    <span className="font-semibold">{hero?.education?.degree}</span>, {hero?.education?.school} ({hero?.education?.graduationDate})
                   </p>
                   <p className="text-sm text-[#5D7386] mt-1">
-                    Merit Scholarship | Advanced Certificate in AI (In Progress)
+                    {hero?.education?.highlights?.join(' | ')}
                   </p>
                 </motion.div>
 
@@ -126,7 +120,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="text-base text-[#758DA1] leading-relaxed"
                 >
-                  Ever feel like your data is trying to tell you something? I do. With SQL, Python, and a strong cup of coffee, I dive into messy datasets to find the &apos;aha!&apos; moments that help teams make smarter moves.
+                  {hero?.bio || ''}
                 </motion.p>
 
                 <motion.div 
@@ -135,9 +129,9 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="pt-2"
                 >
-                  <Link to="/contact">
+                  <Link to={hero?.ctaButton?.link || '/contact'}>
                     <Button className="bg-gradient-to-r from-[#303F4C] to-[#465969] hover:from-[#465969] hover:to-[#5D7386] text-[#B7CBD7] font-semibold px-8 py-5 text-base group border border-[#5D7386]/30 shadow-lg shadow-[#0A1016]/50 hover:shadow-[#90AABA]/10">
-                      Get in Touch
+                      {hero?.ctaButton?.text || 'Get in Touch'}
                       <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                     </Button>
                   </Link>
@@ -153,9 +147,9 @@ export default function Home() {
               className="w-full max-w-6xl mx-auto mt-12"
             >
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {metrics.map((metric, index) => (
+                {metricsWithIcons.map((metric, index) => (
                   <MetricCard
-                    key={index}
+                    key={metric.id || index}
                     value={metric.value}
                     label={metric.label}
                     suffix={metric.suffix}
@@ -169,14 +163,14 @@ export default function Home() {
         </CinematicSection>
 
         {/* Skills Chart Section */}
-        <CinematicSection backgroundImage={slideBackgrounds.skills}>
+        <CinematicSection backgroundImage={slides?.backgrounds?.skills}>
           <div className="flex flex-col items-center justify-center min-h-[80vh] py-8">
             <SkillsChart />
           </div>
         </CinematicSection>
 
         {/* Skill Categories + Footer Section */}
-        <CinematicSection backgroundImage={slideBackgrounds.categories} isLastSection={true}>
+        <CinematicSection backgroundImage={slides?.backgrounds?.categories} isLastSection={true}>
           <div className="flex flex-col min-h-[80vh]">
             <div className="flex-1">
               <motion.div 
@@ -189,11 +183,11 @@ export default function Home() {
               </motion.div>
 
               <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
-                {skillCategories.map((category, index) => {
+                {categoriesWithIcons.map((category, index) => {
                   const Icon = category.icon;
                   return (
                     <motion.div
-                      key={index}
+                      key={category.id || index}
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 + 0.3, ease: "easeOut" }}
@@ -206,7 +200,7 @@ export default function Home() {
                         <h3 className="text-xl font-bold text-[#B7CBD7]">{category.title}</h3>
                       </div>
                       <ul className="space-y-2">
-                        {category.skills.map((skill, idx) => (
+                        {category.skills?.map((skill, idx) => (
                           <li key={idx} className="text-[#758DA1] flex items-start gap-2 text-sm">
                             <span className="text-[#90AABA] mt-0.5">•</span>
                             <span>{skill}</span>
