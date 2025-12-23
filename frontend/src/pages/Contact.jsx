@@ -16,7 +16,7 @@ export default function Contact() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+  const [submitStatus, setSubmitStatus] = useState(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -28,7 +28,6 @@ export default function Contact() {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // Clear status when user starts typing again
     if (submitStatus) setSubmitStatus(null);
   };
 
@@ -76,11 +75,11 @@ export default function Contact() {
   return (
     <PageTransition>
       <div className="min-h-screen text-white relative overflow-x-hidden">
-        {/* Clean dark background - NO backdrop image */}
+        {/* Metallic background - clean, no backdrop */}
         <div 
           className="fixed inset-0 z-0"
           style={{
-            background: 'radial-gradient(ellipse at center, #10080C 0%, #0A0A0F 50%, #050508 100%)',
+            background: 'linear-gradient(180deg, #0A1016 0%, #1C2731 50%, #0A1016 100%)',
           }}
         />
         
@@ -88,11 +87,10 @@ export default function Contact() {
         <div 
           className="fixed inset-0 z-0"
           style={{
-            background: 'radial-gradient(circle at 30% 50%, rgba(225, 29, 72, 0.04) 0%, transparent 50%)',
+            background: 'radial-gradient(circle at 30% 50%, rgba(144, 170, 186, 0.03) 0%, transparent 50%)',
           }}
         />
 
-        {/* Main content */}
         <div className="relative z-10 pt-32 pb-12 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -101,8 +99,8 @@ export default function Contact() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-center mb-12 lg:mb-16"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">Let's Connect</h1>
-              <p className="text-lg md:text-xl text-white/50">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#B7CBD7] mb-4">Let&apos;s Connect</h1>
+              <p className="text-lg md:text-xl text-[#758DA1]">
                 Have a project in mind or just want to chat about data? Drop me a message.
               </p>
             </motion.div>
@@ -115,17 +113,16 @@ export default function Contact() {
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                 className="glass-card rounded-xl p-6 lg:p-8"
               >
-                <h2 className="text-2xl lg:text-3xl font-bold text-white mb-6">Send a Message</h2>
+                <h2 className="text-2xl lg:text-3xl font-bold text-[#B7CBD7] mb-6">Send a Message</h2>
                 
-                {/* Status Messages */}
                 {submitStatus === 'success' && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-6 p-4 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center gap-3"
+                    className="mb-6 p-4 rounded-lg bg-[#303F4C]/50 border border-[#5D7386]/50 flex items-center gap-3"
                   >
-                    <CheckCircle className="text-green-400" size={20} />
-                    <span className="text-green-300 text-sm">Message sent successfully! I'll get back to you soon.</span>
+                    <CheckCircle className="text-[#90AABA]" size={20} />
+                    <span className="text-[#90AABA] text-sm">Message sent successfully! I&apos;ll get back to you soon.</span>
                   </motion.div>
                 )}
                 
@@ -133,16 +130,16 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/30 flex items-center gap-3"
+                    className="mb-6 p-4 rounded-lg bg-[#303F4C]/50 border border-red-500/30 flex items-center gap-3"
                   >
-                    <AlertCircle className="text-rose-400" size={20} />
-                    <span className="text-rose-300 text-sm">Failed to send. Please try again or email directly.</span>
+                    <AlertCircle className="text-red-400" size={20} />
+                    <span className="text-red-300 text-sm">Failed to send. Please try again or email directly.</span>
                   </motion.div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-[#90AABA] mb-2">
                       Name *
                     </label>
                     <Input
@@ -152,13 +149,13 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="bg-[#0A0A0F] border-rose-500/20 text-white placeholder:text-white/30 focus:border-rose-500/50 focus:ring-rose-500/20"
+                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20"
                       placeholder="Your name"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-[#90AABA] mb-2">
                       Email *
                     </label>
                     <Input
@@ -168,13 +165,13 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="bg-[#0A0A0F] border-rose-500/20 text-white placeholder:text-white/30 focus:border-rose-500/50 focus:ring-rose-500/20"
+                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20"
                       placeholder="your.email@example.com"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="company" className="block text-sm font-medium text-[#90AABA] mb-2">
                       Company (Optional)
                     </label>
                     <Input
@@ -183,13 +180,13 @@ export default function Contact() {
                       type="text"
                       value={formData.company}
                       onChange={handleChange}
-                      className="bg-[#0A0A0F] border-rose-500/20 text-white placeholder:text-white/30 focus:border-rose-500/50 focus:ring-rose-500/20"
+                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20"
                       placeholder="Your company"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-[#90AABA] mb-2">
                       Message *
                     </label>
                     <Textarea
@@ -199,7 +196,7 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}
-                      className="bg-[#0A0A0F] border-rose-500/20 text-white placeholder:text-white/30 focus:border-rose-500/50 focus:ring-rose-500/20 resize-none"
+                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20 resize-none"
                       placeholder="Tell me about your project or inquiry..."
                     />
                   </div>
@@ -207,11 +204,11 @@ export default function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-semibold py-5 text-base flex items-center justify-center gap-2 shadow-lg shadow-rose-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-gradient-to-r from-[#303F4C] to-[#465969] hover:from-[#465969] hover:to-[#5D7386] text-[#B7CBD7] font-semibold py-5 text-base flex items-center justify-center gap-2 border border-[#5D7386]/30 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <div className="w-5 h-5 border-2 border-[#5D7386]/30 border-t-[#90AABA] rounded-full animate-spin" />
                         Sending...
                       </>
                     ) : (
@@ -232,9 +229,9 @@ export default function Contact() {
                 className="space-y-6"
               >
                 <div className="glass-card rounded-xl p-6 lg:p-8">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">Connect With Me</h2>
-                  <p className="text-white/60 leading-relaxed mb-6 text-sm lg:text-base">
-                    I'm always open to discussing new opportunities, collaborations, or just having a conversation about data analytics and business strategy.
+                  <h2 className="text-2xl lg:text-3xl font-bold text-[#B7CBD7] mb-4">Connect With Me</h2>
+                  <p className="text-[#758DA1] leading-relaxed mb-6 text-sm lg:text-base">
+                    I&apos;m always open to discussing new opportunities, collaborations, or just having a conversation about data analytics and business strategy.
                   </p>
 
                   <div className="space-y-3">
@@ -242,14 +239,14 @@ export default function Contact() {
                       href="https://www.linkedin.com/in/aryan-bansal9/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 bg-[#0A0A0F] rounded-lg border border-rose-500/20 hover:border-rose-500/40 transition-all group"
+                      className="flex items-center gap-4 p-4 bg-[#0A1016] rounded-lg border border-[#303F4C]/50 hover:border-[#5D7386] transition-all group"
                     >
-                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-rose-500/20 to-pink-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Linkedin size={22} className="text-rose-400" />
+                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-[#303F4C] to-[#465969] flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#90AABA]/10 transition-all">
+                        <Linkedin size={22} className="text-[#90AABA]" />
                       </div>
                       <div>
-                        <p className="text-white font-semibold">LinkedIn</p>
-                        <p className="text-white/40 text-sm">Connect professionally</p>
+                        <p className="text-[#B7CBD7] font-semibold">LinkedIn</p>
+                        <p className="text-[#5D7386] text-sm">Connect professionally</p>
                       </div>
                     </a>
 
@@ -257,47 +254,46 @@ export default function Contact() {
                       href="https://github.com/Aaryan9958"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 bg-[#0A0A0F] rounded-lg border border-rose-500/20 hover:border-rose-500/40 transition-all group"
+                      className="flex items-center gap-4 p-4 bg-[#0A1016] rounded-lg border border-[#303F4C]/50 hover:border-[#5D7386] transition-all group"
                     >
-                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-rose-500/20 to-pink-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Github size={22} className="text-rose-400" />
+                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-[#303F4C] to-[#465969] flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#90AABA]/10 transition-all">
+                        <Github size={22} className="text-[#90AABA]" />
                       </div>
                       <div>
-                        <p className="text-white font-semibold">GitHub</p>
-                        <p className="text-white/40 text-sm">View my code</p>
+                        <p className="text-[#B7CBD7] font-semibold">GitHub</p>
+                        <p className="text-[#5D7386] text-sm">View my code</p>
                       </div>
                     </a>
 
                     <a
                       href="mailto:aryan.bansal@simon.rochester.edu"
-                      className="flex items-center gap-4 p-4 bg-[#0A0A0F] rounded-lg border border-rose-500/20 hover:border-rose-500/40 transition-all group"
+                      className="flex items-center gap-4 p-4 bg-[#0A1016] rounded-lg border border-[#303F4C]/50 hover:border-[#5D7386] transition-all group"
                     >
-                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-rose-500/20 to-pink-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <MailIcon size={22} className="text-rose-400" />
+                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-[#303F4C] to-[#465969] flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#90AABA]/10 transition-all">
+                        <MailIcon size={22} className="text-[#90AABA]" />
                       </div>
                       <div>
-                        <p className="text-white font-semibold">Email</p>
-                        <p className="text-white/40 text-sm">aryan.bansal@simon.rochester.edu</p>
+                        <p className="text-[#B7CBD7] font-semibold">Email</p>
+                        <p className="text-[#5D7386] text-sm">aryan.bansal@simon.rochester.edu</p>
                       </div>
                     </a>
                   </div>
                 </div>
 
                 <div className="glass-card rounded-xl p-6 lg:p-8 relative overflow-hidden">
-                  {/* Gradient accent */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-500" />
+                  {/* Metallic top accent */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#465969] via-[#90AABA] to-[#465969]" />
                   
-                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
+                  <h3 className="text-xl lg:text-2xl font-bold text-[#B7CBD7] mb-3">
                     Currently Seeking Opportunities
                   </h3>
-                  <p className="text-white/60 leading-relaxed text-sm lg:text-base">
-                    I'm actively looking for full-time Business Analyst and Data Analyst roles starting December 2025. If you're hiring or know someone who is, I'd love to connect!
+                  <p className="text-[#758DA1] leading-relaxed text-sm lg:text-base">
+                    I&apos;m actively looking for full-time Business Analyst and Data Analyst roles starting December 2025. If you&apos;re hiring or know someone who is, I&apos;d love to connect!
                   </p>
                 </div>
               </motion.div>
             </div>
 
-            {/* Footer */}
             <div className="mt-20">
               <Footer />
             </div>
