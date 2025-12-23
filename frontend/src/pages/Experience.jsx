@@ -59,7 +59,6 @@ const experiences = [
   },
 ];
 
-// Experience Card Modal Component
 function ExperienceModal({ experience, onClose }) {
   if (!experience) return null;
 
@@ -72,10 +71,8 @@ function ExperienceModal({ experience, onClose }) {
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
-      {/* Backdrop */}
       <div className="absolute inset-0 overlay-backdrop" />
       
-      {/* Modal Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -84,43 +81,38 @@ function ExperienceModal({ experience, onClose }) {
         onClick={(e) => e.stopPropagation()}
         className="experience-modal relative rounded-2xl p-6 md:p-8 max-w-lg w-full max-h-[80vh] overflow-y-auto card-scroll z-10"
       >
-        {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-rose-500/20 transition-colors"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#303F4C] flex items-center justify-center hover:bg-[#465969] transition-colors"
         >
-          <X size={16} className="text-white/60" />
+          <X size={16} className="text-[#90AABA]" />
         </button>
 
-        {/* Content */}
         <div className="pr-8">
           <div className="mb-4">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+            <h3 className="text-xl md:text-2xl font-bold text-[#B7CBD7] mb-2">
               {experience.title}
             </h3>
-            <p className="text-rose-400 font-medium">
+            <p className="text-[#90AABA] font-medium">
               {experience.company}
             </p>
-            <p className="text-white/40 text-sm mt-1">
+            <p className="text-[#5D7386] text-sm mt-1">
               {experience.period}
             </p>
           </div>
           
           {experience.description && (
-            <p className="text-white/60 text-sm mb-4 italic border-l-2 border-rose-500/30 pl-3">
+            <p className="text-[#758DA1] text-sm mb-4 italic border-l-2 border-[#465969] pl-3">
               {experience.description}
             </p>
           )}
           
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider">Key Achievements</h4>
+            <h4 className="text-sm font-semibold text-[#90AABA] uppercase tracking-wider">Key Achievements</h4>
             <ul className="space-y-3">
               {experience.highlights.map((highlight, idx) => (
-                <li
-                  key={idx}
-                  className="text-white/70 text-sm flex items-start gap-3"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0" />
+                <li key={idx} className="text-[#758DA1] text-sm flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#90AABA] mt-2 flex-shrink-0" />
                   <span>{highlight}</span>
                 </li>
               ))}
@@ -132,24 +124,22 @@ function ExperienceModal({ experience, onClose }) {
   );
 }
 
-// Desktop Horizontal Roadmap
 function DesktopRoadmap({ experiences, activeId, onPinClick }) {
   return (
     <div className="hidden md:block relative w-full mx-auto" style={{ height: '400px', maxWidth: '1100px' }}>
-      {/* SVG Roadmap Path */}
       <svg
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 1000 200"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          <linearGradient id="roadGradientRed" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#E11D48" stopOpacity="0.5" />
-            <stop offset="50%" stopColor="#EC4899" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#E11D48" stopOpacity="0.5" />
+          <linearGradient id="roadGradientMetal" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#465969" stopOpacity="0.5" />
+            <stop offset="50%" stopColor="#90AABA" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#465969" stopOpacity="0.5" />
           </linearGradient>
-          <filter id="glowRed">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <filter id="glowMetal">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
@@ -157,21 +147,19 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
           </filter>
         </defs>
         
-        {/* Curved path */}
         <motion.path
           d="M 50 100 Q 200 70, 350 95 Q 500 120, 650 90 Q 800 65, 950 100"
-          stroke="url(#roadGradientRed)"
+          stroke="url(#roadGradientMetal)"
           strokeWidth="4"
           fill="none"
           strokeLinecap="round"
-          filter="url(#glowRed)"
+          filter="url(#glowMetal)"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 2, ease: "easeInOut" }}
         />
       </svg>
 
-      {/* Timeline labels above the roadmap */}
       <div className="absolute top-0 left-0 right-0 flex justify-between px-8">
         {experiences.map((exp, index) => (
           <div
@@ -187,7 +175,7 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.15 }}
-              className="text-xs text-rose-400/80 font-medium"
+              className="text-xs text-[#90AABA]/80 font-medium"
             >
               {exp.endYear}
             </motion.span>
@@ -195,7 +183,6 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
         ))}
       </div>
 
-      {/* Experience Pins */}
       {experiences.map((exp, index) => {
         const xPosition = exp.position.x;
         const yPosition = index % 2 === 0 ? 48 : 52;
@@ -210,22 +197,20 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
               transform: 'translate(-50%, -50%)',
             }}
           >
-            {/* Label Above Pin */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 * index + 0.5 }}
               className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center w-max max-w-[160px]"
             >
-              <p className="text-white font-semibold text-sm leading-tight">
+              <p className="text-[#B7CBD7] font-semibold text-sm leading-tight">
                 {exp.title}
               </p>
-              <p className="text-rose-400 text-xs mt-0.5">
+              <p className="text-[#90AABA] text-xs mt-0.5">
                 {exp.company}
               </p>
             </motion.div>
 
-            {/* Pin Marker */}
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -241,16 +226,15 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
               >
                 <MapPin 
                   size={24} 
-                  className={activeId === exp.id ? 'text-white' : 'text-rose-400'}
+                  className={activeId === exp.id ? 'text-[#0A1016]' : 'text-[#90AABA]'}
                 />
               </div>
               
-              {/* Pin glow effect */}
               {activeId === exp.id && (
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1.8 }}
-                  className="absolute inset-0 rounded-full bg-rose-500/30 blur-2xl -z-10"
+                  className="absolute inset-0 rounded-full bg-[#90AABA]/30 blur-2xl -z-10"
                 />
               )}
             </motion.button>
@@ -261,11 +245,9 @@ function DesktopRoadmap({ experiences, activeId, onPinClick }) {
   );
 }
 
-// Mobile Vertical Roadmap
 function MobileRoadmap({ experiences, activeId, onPinClick }) {
   return (
     <div className="md:hidden relative w-full px-4" style={{ minHeight: '600px' }}>
-      {/* Vertical timeline line */}
       <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2">
         <motion.div
           initial={{ height: 0 }}
@@ -273,23 +255,21 @@ function MobileRoadmap({ experiences, activeId, onPinClick }) {
           transition={{ duration: 1.5, ease: "easeInOut" }}
           className="w-full h-full rounded-full"
           style={{
-            background: 'linear-gradient(180deg, rgba(225, 29, 72, 0.3) 0%, rgba(236, 72, 153, 0.5) 50%, rgba(225, 29, 72, 0.3) 100%)',
-            boxShadow: '0 0 20px rgba(225, 29, 72, 0.3)',
+            background: 'linear-gradient(180deg, rgba(70, 89, 105, 0.3) 0%, rgba(144, 170, 186, 0.5) 50%, rgba(70, 89, 105, 0.3) 100%)',
+            boxShadow: '0 0 20px rgba(144, 170, 186, 0.3)',
           }}
         />
       </div>
 
-      {/* Timeline labels at top and bottom */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 text-center">
-        <span className="text-xs text-white/40">Current</span>
-        <p className="text-rose-400 font-semibold">2024</p>
+        <span className="text-xs text-[#5D7386]">Current</span>
+        <p className="text-[#90AABA] font-semibold">2024</p>
       </div>
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center">
-        <span className="text-xs text-white/40">Start</span>
-        <p className="text-rose-400 font-semibold">2022</p>
+        <span className="text-xs text-[#5D7386]">Start</span>
+        <p className="text-[#90AABA] font-semibold">2022</p>
       </div>
 
-      {/* Experience pins - arranged vertically */}
       <div className="pt-16 pb-16 space-y-16">
         {[...experiences].reverse().map((exp, index) => {
           const isLeft = index % 2 === 0;
@@ -302,20 +282,18 @@ function MobileRoadmap({ experiences, activeId, onPinClick }) {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="relative flex items-center"
             >
-              {/* Content card */}
               <div className={`w-[45%] ${isLeft ? 'mr-auto pr-4 text-right' : 'ml-auto pl-4 text-left'}`}>
-                <p className="text-white font-semibold text-sm leading-tight">
+                <p className="text-[#B7CBD7] font-semibold text-sm leading-tight">
                   {exp.title}
                 </p>
-                <p className="text-rose-400 text-xs mt-0.5">
+                <p className="text-[#90AABA] text-xs mt-0.5">
                   {exp.company}
                 </p>
-                <p className="text-white/40 text-xs mt-0.5">
+                <p className="text-[#5D7386] text-xs mt-0.5">
                   {exp.period}
                 </p>
               </div>
 
-              {/* Center pin */}
               <button
                 onClick={() => onPinClick(exp.id)}
                 className="absolute left-1/2 -translate-x-1/2 z-10"
@@ -325,7 +303,7 @@ function MobileRoadmap({ experiences, activeId, onPinClick }) {
                     activeId === exp.id ? 'active' : ''
                   }`}
                 >
-                  <MapPin size={20} className={activeId === exp.id ? 'text-white' : 'text-rose-400'} />
+                  <MapPin size={20} className={activeId === exp.id ? 'text-[#0A1016]' : 'text-[#90AABA]'} />
                 </div>
               </button>
             </motion.div>
@@ -355,52 +333,49 @@ export default function Experience() {
   return (
     <PageTransition>
       <div className="min-h-screen text-white relative overflow-x-hidden">
-        {/* Medieval map + futuristic backdrop */}
+        {/* Metallic background */}
         <div 
           className="fixed inset-0 z-0"
           style={{
-            background: 'radial-gradient(ellipse at center, #15080D 0%, #0A0A0F 50%, #050508 100%)',
+            background: 'linear-gradient(180deg, #0A1016 0%, #1C2731 50%, #0A1016 100%)',
           }}
         />
         
-        {/* Background texture (medieval map with circuits overlay) */}
+        {/* Texture overlay */}
         <div 
-          className="fixed inset-0 z-0 opacity-[0.04]"
+          className="fixed inset-0 z-0 opacity-[0.03]"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1920&q=80')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'blur(2px) sepia(30%)',
+            filter: 'blur(2px) grayscale(100%)',
           }}
         />
         
-        {/* Dark red glass overlay */}
+        {/* Ambient glow */}
         <div 
           className="fixed inset-0 z-0"
           style={{
-            background: 'radial-gradient(ellipse at 30% 30%, rgba(225, 29, 72, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(236, 72, 153, 0.05) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse at 30% 30%, rgba(144, 170, 186, 0.04) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(255, 51, 102, 0.02) 0%, transparent 50%)',
           }}
         />
 
-        {/* Main content */}
         <div className="relative z-10 pt-20 pb-12">
           <div className="max-w-7xl mx-auto px-4 lg:px-8">
-            {/* Header - Compact */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-6 md:mb-8"
             >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#B7CBD7] mb-2">
                 Experience Journey
               </h1>
-              <p className="text-base md:text-lg text-white/50">
+              <p className="text-base md:text-lg text-[#758DA1]">
                 From insights to impact: my professional roadmap
               </p>
             </motion.div>
 
-            {/* Roadmap */}
             <DesktopRoadmap 
               experiences={experiences} 
               activeId={activeId} 
@@ -412,26 +387,23 @@ export default function Experience() {
               onPinClick={handlePinClick} 
             />
 
-            {/* Desktop Timeline Labels */}
             <div className="hidden md:flex justify-between items-center max-w-[1100px] mx-auto px-8 mt-4">
               <div className="text-left">
-                <p className="text-white/30 text-xs">Start</p>
-                <p className="text-rose-400/80 font-semibold text-sm mt-0.5">2022</p>
+                <p className="text-[#5D7386] text-xs">Start</p>
+                <p className="text-[#90AABA] font-semibold text-sm mt-0.5">2022</p>
               </div>
               <div className="text-right">
-                <p className="text-white/30 text-xs">Current</p>
-                <p className="text-rose-400/80 font-semibold text-sm mt-0.5">2024</p>
+                <p className="text-[#5D7386] text-xs">Current</p>
+                <p className="text-[#90AABA] font-semibold text-sm mt-0.5">2024</p>
               </div>
             </div>
           </div>
 
-          {/* Footer */}
           <div className="mt-20">
             <Footer />
           </div>
         </div>
 
-        {/* Experience Modal */}
         <AnimatePresence>
           {activeId && (
             <ExperienceModal 
