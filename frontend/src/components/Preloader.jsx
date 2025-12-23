@@ -68,6 +68,9 @@ export default function Preloader({ onComplete }) {
   const [isComplete, setIsComplete] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
+  // Pre-generate keyword data to avoid Math.random during render
+  const keywordData = useMemo(() => generateKeywordData(), []);
+
   useEffect(() => {
     // Check for reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
