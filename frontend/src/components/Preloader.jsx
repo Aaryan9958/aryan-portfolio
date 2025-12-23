@@ -130,10 +130,10 @@ export default function Preloader({ onComplete }) {
           {/* Floating keywords background */}
           {!reducedMotion && (
             <div className="absolute inset-0 overflow-hidden">
-              {keywords.map((keyword, index) => (
+              {keywordData.map((data, index) => (
                 <FloatingKeyword 
                   key={index} 
-                  text={keyword} 
+                  data={data}
                   delay={index * 0.3}
                   reducedMotion={reducedMotion}
                 />
