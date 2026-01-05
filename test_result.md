@@ -216,3 +216,5 @@ agent_communication:
     message: "Implemented complete interactive Projects section with analytics-themed SVG visual, 5 floating markers, expandable panels, and mobile bottom sheet. All basic functionality verified via screenshots. Need comprehensive UI testing."
   - agent: "testing"
     message: "TESTING COMPLETE: Analytics visual and markers work perfectly. Mobile bottom sheet functions correctly. Found 2 critical issues: 1) Panel section headers ('ANALYTICS METHODS' and 'IMPACT & OUTCOME') not displaying properly, 2) Desktop close functionality (close button and backdrop click) not working. Mobile close works fine. Color palette compliance verified."
+  - agent: "main"
+    message: "REBUILT Projects section per user request - now uses a SINGLE hero image (blockchain visualization) with 5 markers overlaid. Fixed all issues: panel shows all sections (WHAT I DID, TOOLS & METHODS, OUTCOME), close functionality works on both desktop and mobile. Ready for final testing."
