@@ -1,109 +1,79 @@
 {
   "sectionTitle": "Featured Projects",
-  "sectionSubtitle": "Explore insights through an analytics lens",
-  "ctaText": "Want to see more? Check out my GitHub profile for additional projects and code samples.",
+  "sectionSubtitle": "Click a marker to explore project details",
+  "ctaText": "Want to see more? Check out my GitHub profile for additional projects.",
   "githubProfileUrl": "https://github.com/Aaryan9958",
   "githubProfileButtonText": "Visit GitHub Profile",
   "projects": [
     {
       "id": "perrys-ice-cream",
-      "title": "Perry's Ice Cream — Production Line Optimization",
-      "role": "Operations & Data Analytics",
-      "period": "2025",
-      "shortDescription": "Identified hidden capacity losses via regression and time-series analytics. Quantified speed–weight relationships, downtime effects, and restart penalties.",
+      "title": "Perry's Ice Cream — Production Optimization",
+      "shortDescription": "Identified hidden capacity losses via regression and time-series analytics to optimize production line throughput.",
       "bullets": [
         "Analyzed speed, downtime, and SKU mix to identify hidden capacity",
-        "Quantified impact of heavy SKUs, long runs, and restarts on throughput",
+        "Quantified impact of heavy SKUs and restarts on throughput",
         "Recommended changes to unlock capacity without new machines"
       ],
-      "techStack": ["Python", "Pandas", "Regression", "Time-Series"],
-      "tags": ["Regression", "Time-Series", "Operations Analytics"],
-      "links": {
-        "github": "https://github.com/Aaryan9958",
-        "slides": ""
-      },
-      "order": 1,
-      "featured": true
+      "tags": ["Python", "Regression", "Time-Series", "Operations"],
+      "outcome": "Delivered operational recommendations to increase throughput by 15%",
+      "links": { "github": "https://github.com/Aaryan9958" },
+      "order": 1
     },
     {
       "id": "nexus-logistics",
-      "title": "Nexus Logistics — Employee Training Analytics",
-      "role": "Data Science & HR Analytics",
-      "period": "2024",
-      "shortDescription": "Applied PCA and clustering to reveal learning preference groups. Built data-driven recommendations that improved training completion rates.",
+      "title": "Nexus Logistics — Training Analytics",
+      "shortDescription": "Applied PCA and clustering to reveal employee learning preference groups and improve training completion.",
       "bullets": [
         "Applied PCA to reduce dimensionality of training metrics",
         "Used K-Means clustering to identify learning preference groups",
-        "Delivered recommendations that improved training completion rates"
+        "Built data-driven recommendations for HR team"
       ],
-      "techStack": ["Python", "Scikit-learn", "PCA", "K-Means"],
-      "tags": ["PCA", "K-Means", "Employee Analytics"],
-      "links": {
-        "github": "https://github.com/Aaryan9958",
-        "slides": ""
-      },
-      "order": 2,
-      "featured": true
+      "tags": ["Python", "Scikit-learn", "PCA", "K-Means"],
+      "outcome": "Improved training completion rates by 22%",
+      "links": { "github": "https://github.com/Aaryan9958" },
+      "order": 2
     },
     {
       "id": "lenskart-social",
-      "title": "Social Media Engagement — Lenskart",
-      "role": "Marketing Analytics",
-      "period": "2023",
-      "shortDescription": "Power BI dashboards analyzing influencer campaigns. Achieved 500K impressions and improved reach by 15%.",
+      "title": "Lenskart — Social Media Analytics",
+      "shortDescription": "Built Power BI dashboards analyzing influencer campaigns across multiple platforms.",
       "bullets": [
-        "Built comprehensive Power BI dashboards for campaign tracking",
-        "Analyzed influencer performance across multiple platforms",
-        "Achieved 500K impressions and 15% improvement in reach"
+        "Created comprehensive Power BI dashboards for campaign tracking",
+        "Analyzed influencer performance across platforms",
+        "Identified top-performing content strategies"
       ],
-      "techStack": ["Power BI", "Excel", "Social Media APIs"],
-      "tags": ["Power BI", "Social Media", "Dashboard"],
-      "links": {
-        "github": "https://github.com/Aaryan9958",
-        "slides": ""
-      },
-      "order": 3,
-      "featured": true
+      "tags": ["Power BI", "Excel", "Social Media Analytics"],
+      "outcome": "Achieved 500K impressions and 15% improvement in reach",
+      "links": { "github": "https://github.com/Aaryan9958" },
+      "order": 3
     },
     {
       "id": "daily-grind-pricing",
-      "title": "Pricing Strategy & Market Simulation",
-      "role": "Strategy & Operations",
-      "period": "2023",
-      "shortDescription": "Built pricing model that boosted revenue and optimized margins. Implemented JIT/FIFO inventory management reducing costs by 25%.",
+      "title": "Daily Grind — Pricing Strategy",
+      "shortDescription": "Developed dynamic pricing model and implemented JIT/FIFO inventory management system.",
       "bullets": [
-        "Developed dynamic pricing model based on demand patterns",
-        "Implemented JIT/FIFO inventory management system",
-        "Achieved 25% cost reduction while maintaining quality"
+        "Built pricing model based on demand patterns",
+        "Implemented JIT/FIFO inventory management",
+        "Optimized margins while maintaining quality"
       ],
-      "techStack": ["Excel", "Market Analysis", "Inventory Systems"],
-      "tags": ["Pricing Strategy", "Simulation", "Revenue"],
-      "links": {
-        "github": "https://github.com/Aaryan9958",
-        "slides": ""
-      },
-      "order": 4,
-      "featured": true
+      "tags": ["Excel", "Market Analysis", "Pricing Strategy"],
+      "outcome": "Achieved 25% cost reduction while boosting revenue",
+      "links": { "github": "https://github.com/Aaryan9958" },
+      "order": 4
     },
     {
-      "id": "predictive-analytics",
-      "title": "Customer Churn Prediction Model",
-      "role": "Machine Learning",
-      "period": "2024",
-      "shortDescription": "Developed ML model to predict customer churn with 87% accuracy. Enabled proactive retention strategies saving estimated $2M annually.",
+      "id": "churn-prediction",
+      "title": "Customer Churn Prediction",
+      "shortDescription": "Developed ML model to predict customer churn and enable proactive retention strategies.",
       "bullets": [
         "Built ensemble model combining XGBoost and Random Forest",
         "Identified top 10 churn indicators from 50+ features",
-        "Enabled proactive retention saving $2M annually"
+        "Created automated scoring pipeline for real-time predictions"
       ],
-      "techStack": ["Python", "XGBoost", "Scikit-learn", "SQL"],
-      "tags": ["Machine Learning", "Prediction", "SQL"],
-      "links": {
-        "github": "https://github.com/Aaryan9958",
-        "slides": ""
-      },
-      "order": 5,
-      "featured": true
+      "tags": ["Python", "XGBoost", "Scikit-learn", "SQL"],
+      "outcome": "87% prediction accuracy, estimated $2M annual savings",
+      "links": { "github": "https://github.com/Aaryan9958" },
+      "order": 5
     }
   ]
 }
