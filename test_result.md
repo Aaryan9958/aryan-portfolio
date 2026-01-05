@@ -209,10 +209,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Project Panel Expansion on Click"
     - "Close Panel Interaction"
   stuck_tasks:
-    - "Project Panel Expansion on Click"
     - "Close Panel Interaction"
   test_all: false
   test_priority: "stuck_first"
