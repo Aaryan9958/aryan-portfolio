@@ -1,8 +1,24 @@
 import { motion } from 'framer-motion';
 import { Linkedin, Github, Mail } from 'lucide-react';
 
+// Import JSON data
+import homeData from '../content/home.json';
+
+// Icon mapping
+const iconMap = {
+  Linkedin,
+  Github,
+  Mail,
+};
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  
+  // Get footer data from JSON with defaults
+  const footerData = homeData.footer || {};
+  const name = footerData.name || 'Aryan Bansal';
+  const title = footerData.title || 'Business Analytics Professional';
+  const socialLinks = footerData.socialLinks || [];
   
   return (
     <footer className="relative py-12 px-6">
@@ -25,9 +41,9 @@ export default function Footer() {
                 textShadow: '0 0 20px rgba(144, 170, 186, 0.2)'
               }}
             >
-              Aryan Bansal
+              {name}
             </h3>
-            <p className="text-sm text-[#5D7386]">Business Analytics Professional</p>
+            <p className="text-sm text-[#5D7386]">{title}</p>
           </motion.div>
           
           {/* Social Links */}
@@ -38,31 +54,21 @@ export default function Footer() {
             transition={{ delay: 0.1 }}
             className="flex items-center gap-4"
           >
-            <a
-              href="https://www.linkedin.com/in/aryan-bansal9/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-[#1C2731] border border-[#303F4C]/50 flex items-center justify-center hover:bg-[#303F4C] hover:border-[#5D7386] transition-all group"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={18} className="text-[#758DA1] group-hover:text-[#B7CBD7] transition-colors" />
-            </a>
-            <a
-              href="https://github.com/Aaryan9958"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-[#1C2731] border border-[#303F4C]/50 flex items-center justify-center hover:bg-[#303F4C] hover:border-[#5D7386] transition-all group"
-              aria-label="GitHub"
-            >
-              <Github size={18} className="text-[#758DA1] group-hover:text-[#B7CBD7] transition-colors" />
-            </a>
-            <a
-              href="mailto:aryan.bansal@simon.rochester.edu"
-              className="w-10 h-10 rounded-full bg-[#1C2731] border border-[#303F4C]/50 flex items-center justify-center hover:bg-[#303F4C] hover:border-[#5D7386] transition-all group"
-              aria-label="Email"
-            >
-              <Mail size={18} className="text-[#758DA1] group-hover:text-[#B7CBD7] transition-colors" />
-            </a>
+            {socialLinks.map((link, index) => {
+              const Icon = iconMap[link.icon] || Mail;
+              return (
+                <a
+                  key={index}
+                  href={link.url}
+                  target={link.url.startsWith('mailto:') ? undefined : '_blank'}
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-[#1C2731] border border-[#303F4C]/50 flex items-center justify-center hover:bg-[#303F4C] hover:border-[#5D7386] transition-all group"
+                  aria-label={link.platform}
+                >
+                  <Icon size={18} className="text-[#758DA1] group-hover:text-[#B7CBD7] transition-colors" />
+                </a>
+              );
+            })}
           </motion.div>
           
           {/* Copyright */}
@@ -73,7 +79,7 @@ export default function Footer() {
             transition={{ delay: 0.2 }}
             className="text-sm text-[#465969]"
           >
-            © {currentYear} Aryan Bansal. All rights reserved.
+            © {currentYear} {name}. All rights reserved.
           </motion.p>
         </div>
       </div>
