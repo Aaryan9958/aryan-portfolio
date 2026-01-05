@@ -1,6 +1,6 @@
 {
   "sectionTitle": "Featured Projects",
-  "sectionSubtitle": "Real-world analytics delivering measurable impact",
+  "sectionSubtitle": "Explore insights through an analytics lens",
   "ctaText": "Want to see more? Check out my GitHub profile for additional projects and code samples.",
   "githubProfileUrl": "https://github.com/Aaryan9958",
   "githubProfileButtonText": "Visit GitHub Profile",
@@ -10,7 +10,7 @@
       "title": "Perry's Ice Cream — Production Line Optimization",
       "role": "Operations & Data Analytics",
       "period": "2025",
-      "shortDescription": "Identified hidden capacity losses via regression and time-series analytics. Quantified speed–weight relationships, downtime effects, and restart penalties. Delivered operational recommendations to increase throughput.",
+      "shortDescription": "Identified hidden capacity losses via regression and time-series analytics. Quantified speed–weight relationships, downtime effects, and restart penalties.",
       "bullets": [
         "Analyzed speed, downtime, and SKU mix to identify hidden capacity",
         "Quantified impact of heavy SKUs, long runs, and restarts on throughput",
@@ -20,60 +20,54 @@
       "tags": ["Regression", "Time-Series", "Operations Analytics"],
       "links": {
         "github": "https://github.com/Aaryan9958",
-        "slides": "",
-        "report": ""
+        "slides": ""
       },
       "order": 1,
-      "featured": true,
-      "thumbnail": ""
+      "featured": true
     },
     {
       "id": "nexus-logistics",
       "title": "Nexus Logistics — Employee Training Analytics",
       "role": "Data Science & HR Analytics",
       "period": "2024",
-      "shortDescription": "PCA + clustering to reveal learning preference groups. Built data-driven recommendations to improve training completion.",
+      "shortDescription": "Applied PCA and clustering to reveal learning preference groups. Built data-driven recommendations that improved training completion rates.",
       "bullets": [
         "Applied PCA to reduce dimensionality of training metrics",
         "Used K-Means clustering to identify learning preference groups",
         "Delivered recommendations that improved training completion rates"
       ],
       "techStack": ["Python", "Scikit-learn", "PCA", "K-Means"],
-      "tags": ["PCA", "K-Means Clustering", "Employee Analytics"],
+      "tags": ["PCA", "K-Means", "Employee Analytics"],
       "links": {
         "github": "https://github.com/Aaryan9958",
-        "slides": "",
-        "report": ""
+        "slides": ""
       },
       "order": 2,
-      "featured": true,
-      "thumbnail": ""
+      "featured": true
     },
     {
       "id": "lenskart-social",
-      "title": "Social Media Engagement Optimization — Lenskart",
+      "title": "Social Media Engagement — Lenskart",
       "role": "Marketing Analytics",
       "period": "2023",
-      "shortDescription": "Power BI dashboards analyzing influencer campaigns. 500K impressions & improved reach by 15%.",
+      "shortDescription": "Power BI dashboards analyzing influencer campaigns. Achieved 500K impressions and improved reach by 15%.",
       "bullets": [
         "Built comprehensive Power BI dashboards for campaign tracking",
         "Analyzed influencer performance across multiple platforms",
         "Achieved 500K impressions and 15% improvement in reach"
       ],
       "techStack": ["Power BI", "Excel", "Social Media APIs"],
-      "tags": ["Power BI", "Social Media Analytics", "Dashboard Design"],
+      "tags": ["Power BI", "Social Media", "Dashboard"],
       "links": {
         "github": "https://github.com/Aaryan9958",
-        "slides": "",
-        "report": ""
+        "slides": ""
       },
       "order": 3,
-      "featured": true,
-      "thumbnail": ""
+      "featured": true
     },
     {
       "id": "daily-grind-pricing",
-      "title": "Pricing Strategy & Market Simulation — Daily Grind",
+      "title": "Pricing Strategy & Market Simulation",
       "role": "Strategy & Operations",
       "period": "2023",
       "shortDescription": "Built pricing model that boosted revenue and optimized margins. Implemented JIT/FIFO inventory management reducing costs by 25%.",
@@ -83,15 +77,33 @@
         "Achieved 25% cost reduction while maintaining quality"
       ],
       "techStack": ["Excel", "Market Analysis", "Inventory Systems"],
-      "tags": ["Pricing Strategy", "Market Simulation", "Revenue Optimization"],
+      "tags": ["Pricing Strategy", "Simulation", "Revenue"],
       "links": {
         "github": "https://github.com/Aaryan9958",
-        "slides": "",
-        "report": ""
+        "slides": ""
       },
       "order": 4,
-      "featured": true,
-      "thumbnail": ""
+      "featured": true
+    },
+    {
+      "id": "predictive-analytics",
+      "title": "Customer Churn Prediction Model",
+      "role": "Machine Learning",
+      "period": "2024",
+      "shortDescription": "Developed ML model to predict customer churn with 87% accuracy. Enabled proactive retention strategies saving estimated $2M annually.",
+      "bullets": [
+        "Built ensemble model combining XGBoost and Random Forest",
+        "Identified top 10 churn indicators from 50+ features",
+        "Enabled proactive retention saving $2M annually"
+      ],
+      "techStack": ["Python", "XGBoost", "Scikit-learn", "SQL"],
+      "tags": ["Machine Learning", "Prediction", "SQL"],
+      "links": {
+        "github": "https://github.com/Aaryan9958",
+        "slides": ""
+      },
+      "order": 5,
+      "featured": true
     }
   ]
 }
