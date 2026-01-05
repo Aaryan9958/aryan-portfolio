@@ -182,6 +182,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "❌ TESTED: Close functionality not working on desktop - neither close button nor backdrop click closes the panel. However, mobile close button works correctly."
+      - working: false
+        agent: "testing"
+        comment: "❌ TESTED: Desktop close button (X) not working - clicking it does not close the panel. However, backdrop click DOES work to close panels on desktop. Mobile close button works correctly. Escape key functionality not tested due to Playwright limitations."
 
   - task: "Color Palette Compliance"
     implemented: true
