@@ -441,8 +441,10 @@ const ProjectPanel = ({ project, position, onClose }) => {
 
         {/* Close button */}
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full transition-all hover:bg-[#465969]/50"
+          onClick={handleCloseClick}
+          className="absolute top-4 right-4 p-2 rounded-full transition-all hover:bg-[#465969]/50 z-10"
+          type="button"
+          aria-label="Close panel"
         >
           <X className="w-5 h-5 text-[#90AABA]" />
         </button>
@@ -476,7 +478,7 @@ const ProjectPanel = ({ project, position, onClose }) => {
             transition={{ delay: 0.2, duration: 0.4 }}
             className="mb-5"
           >
-            <span className="text-xs uppercase tracking-wider text-[#5D7386] mb-2 block">Analytics Methods</span>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-[#758DA1] mb-3">Analytics Methods</h4>
             <div className="flex flex-wrap gap-2">
               {(project.tags || project.techStack || []).slice(0, 5).map((method, idx) => (
                 <span 
@@ -497,7 +499,7 @@ const ProjectPanel = ({ project, position, onClose }) => {
               transition={{ delay: 0.25, duration: 0.4 }}
               className="mb-6"
             >
-              <span className="text-xs uppercase tracking-wider text-[#5D7386] mb-2 block">Impact & Outcome</span>
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-[#758DA1] mb-3">Impact & Outcome</h4>
               <ul className="space-y-2">
                 {project.bullets.map((bullet, idx) => (
                   <li key={idx} className="text-[#758DA1] text-sm flex items-start gap-2">
