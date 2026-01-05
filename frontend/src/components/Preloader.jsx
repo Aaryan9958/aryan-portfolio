@@ -1,9 +1,12 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SITE_CONFIG } from '../config/siteConfig';
+
+// Import JSON data
+import siteData from '../content/site.json';
+import homeData from '../content/home.json';
 
 // Pre-generate random values for keywords
-const generateKeywordData = () => keywords.map((text, index) => ({
+const generateKeywordData = (keywords) => keywords.map((text, index) => ({
   text,
   randomX: (index * 17 + 23) % 80 + 10,
   randomY: (index * 31 + 47) % 80 + 10,
@@ -11,14 +14,6 @@ const generateKeywordData = () => keywords.map((text, index) => ({
   randomOffsetX: (index * 13 % 20) - 10,
   randomOffsetY: (index * 19 % 20) - 10,
 }));
-
-const keywords = [
-  'SQL', 'Python', 'R', 'Analytics', 'A/B Testing', 
-  'Causal Inference', 'Dashboards', 'Tableau', 'Power BI',
-  'Machine Learning', 'Data Science', 'Segmentation', 
-  'KPI', 'ROI', 'Regression', 'Forecasting', 'ETL',
-  'Business Intelligence', 'Statistics', 'Visualization'
-];
 
 function FloatingKeyword({ data, delay, reducedMotion }) {
   const { text, randomX, randomY, randomDuration, randomOffsetX, randomOffsetY } = data;
@@ -67,27 +62,36 @@ export default function Preloader({ onComplete }) {
   const [isComplete, setIsComplete] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  const keywordData = useMemo(() => generateKeywordData(), []);
+  // Get preloader config from JSON
+  const preloaderConfig = siteData.preloader || {};
+  const duration = preloaderConfig.duration || 5000;
+  const respectReducedMotion = preloaderConfig.respectReducedMotion !== false;
+  const keywords = preloaderConfig.keywords || [];
+  
+  // Get hero name from home.json
+  const heroName = homeData.hero?.name || 'Loading...';
+
+  const keywordData = useMemo(() => generateKeywordData(keywords), [keywords]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mediaQuery.matches && SITE_CONFIG.RESPECT_REDUCED_MOTION);
+    setReducedMotion(mediaQuery.matches && respectReducedMotion);
     
     const handleChange = (e) => {
-      setReducedMotion(e.matches && SITE_CONFIG.RESPECT_REDUCED_MOTION);
+      setReducedMotion(e.matches && respectReducedMotion);
     };
     mediaQuery.addEventListener('change', handleChange);
     
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  }, [respectReducedMotion]);
 
   useEffect(() => {
-    const duration = reducedMotion ? 1500 : SITE_CONFIG.PRELOADER_DURATION;
+    const actualDuration = reducedMotion ? 1500 : duration;
     const startTime = Date.now();
     
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
-      const newProgress = Math.min((elapsed / duration) * 100, 100);
+      const newProgress = Math.min((elapsed / actualDuration) * 100, 100);
       setProgress(newProgress);
       
       if (newProgress < 100) {
@@ -101,7 +105,7 @@ export default function Preloader({ onComplete }) {
     };
     
     requestAnimationFrame(updateProgress);
-  }, [onComplete, reducedMotion]);
+  }, [onComplete, reducedMotion, duration]);
 
   return (
     <AnimatePresence>
@@ -124,7 +128,7 @@ export default function Preloader({ onComplete }) {
           />
           
           {/* Floating keywords background */}
-          {!reducedMotion && (
+          {!reducedMotion && keywordData.length > 0 && (
             <div className="absolute inset-0 overflow-hidden">
               {keywordData.map((data, index) => (
                 <FloatingKeyword 
@@ -153,7 +157,7 @@ export default function Preloader({ onComplete }) {
                   textShadow: '0 0 40px rgba(144, 170, 186, 0.3)'
                 }}
               >
-                Aryan Bansal
+                {heroName}
               </h1>
               <p className="text-[#5D7386] text-sm tracking-widest uppercase">
                 Business Analytics
