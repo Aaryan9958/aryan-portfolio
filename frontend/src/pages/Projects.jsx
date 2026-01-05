@@ -13,11 +13,11 @@ const HERO_IMAGE = 'https://images.unsplash.com/photo-1639322537504-6427a16b0a28
 
 // Marker positions (percentage-based for responsiveness)
 const MARKER_POSITIONS = [
-  { x: 18, y: 30 },   // Top-left area
-  { x: 50, y: 25 },   // Top-center
-  { x: 82, y: 35 },   // Top-right
-  { x: 30, y: 70 },   // Bottom-left
-  { x: 70, y: 65 },   // Bottom-right
+  { x: 20, y: 32 },   // Left area
+  { x: 50, y: 28 },   // Top-center
+  { x: 80, y: 38 },   // Right area
+  { x: 32, y: 65 },   // Bottom-left
+  { x: 68, y: 60 },   // Bottom-right
 ];
 
 // Interactive Marker Component
