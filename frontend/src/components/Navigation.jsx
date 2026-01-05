@@ -3,8 +3,12 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Import JSON data
+import siteData from '../content/site.json';
+import homeData from '../content/home.json';
+
 // Elegant signature with metallic styling
-function NavbarSignature() {
+function NavbarSignature({ name }) {
   return (
     <div className="flex items-center relative">
       <motion.span
@@ -18,7 +22,7 @@ function NavbarSignature() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {"Aryan Bansal".split("").map((char, i) => (
+        {(name || 'Portfolio').split("").map((char, i) => (
           <motion.span
             key={i}
             initial={{ opacity: 0, y: 5 }}
@@ -42,12 +46,16 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const navLinks = [
+  // Get navigation data from JSON
+  const navLinks = siteData.navigation || [
     { path: '/', label: 'Home' },
     { path: '/experience', label: 'Experience' },
     { path: '/projects', label: 'Projects' },
     { path: '/contact', label: 'Contact' },
   ];
+  
+  // Get name from home.json for signature
+  const heroName = homeData.hero?.name || 'Portfolio';
 
   const isActive = (path) => location.pathname === path;
 
@@ -57,7 +65,7 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-20">
           {/* Signature Logo */}
           <Link to="/" className="relative group flex items-center">
-            <NavbarSignature />
+            <NavbarSignature name={heroName} />
             <div className="absolute inset-0 bg-gradient-to-r from-[#90AABA]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur-xl pointer-events-none" />
           </Link>
 
