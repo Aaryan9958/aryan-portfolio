@@ -9,7 +9,9 @@ import Experience from "./pages/Experience";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Preloader from "./components/Preloader";
-import { SITE_CONFIG } from "./config/siteConfig";
+
+// Import site config
+import siteData from "./content/site.json";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -27,9 +29,12 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  // Get preloader config from JSON
+  const preloaderEnabled = siteData.preloader?.enabled !== false;
+  
   // Check if this is first visit in this session
   const hasShownPreloader = sessionStorage.getItem('preloaderShown') === 'true';
-  const shouldShowPreloader = SITE_CONFIG.ENABLE_PRELOADER && !hasShownPreloader;
+  const shouldShowPreloader = preloaderEnabled && !hasShownPreloader;
   
   const [showPreloader, setShowPreloader] = useState(shouldShowPreloader);
   const [appReady, setAppReady] = useState(!shouldShowPreloader);
