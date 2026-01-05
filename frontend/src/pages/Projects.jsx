@@ -162,9 +162,15 @@ const ProjectPanel = ({ project, onClose, isMobile }) => {
 
         {/* Close button */}
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-[#465969]/50 transition-colors z-10"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onClose();
+          }}
+          className="absolute top-4 right-4 w-10 h-10 rounded-full hover:bg-[#465969]/50 transition-colors flex items-center justify-center cursor-pointer"
+          style={{ zIndex: 110 }}
           type="button"
+          aria-label="Close panel"
         >
           <X className="w-5 h-5 text-[#90AABA]" />
         </button>
