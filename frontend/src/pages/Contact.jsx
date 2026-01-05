@@ -8,16 +8,37 @@ import { useToast } from '../hooks/use-toast';
 import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
 
+// Import JSON data
+import contactData from '../content/contact.json';
+
+// Icon mapping
+const iconMap = {
+  Linkedin,
+  Github,
+  Mail: MailIcon,
+};
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const { toast } = useToast();
+
+  // Get data from JSON with defaults
+  const pageTitle = contactData.pageTitle || "Let's Connect";
+  const pageSubtitle = contactData.pageSubtitle || '';
+  const formConfig = contactData.form || {};
+  const connectSection = contactData.connectSection || {};
+  const opportunityCard = contactData.opportunityCard || {};
+
+  // Initialize form data based on fields
+  useEffect(() => {
+    const initialData = {};
+    (formConfig.fields || []).forEach(field => {
+      initialData[field.name] = '';
+    });
+    setFormData(initialData);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,7 +58,7 @@ export default function Contact() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('https://formspree.io/f/mykgpqkv', {
+      const response = await fetch(formConfig.endpoint || 'https://formspree.io/f/mykgpqkv', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,14 +70,14 @@ export default function Contact() {
         setSubmitStatus('success');
         toast({
           title: "Message sent successfully!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
+          description: formConfig.successMessage || "Thank you for reaching out.",
         });
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          message: '',
+        // Reset form
+        const resetData = {};
+        (formConfig.fields || []).forEach(field => {
+          resetData[field.name] = '';
         });
+        setFormData(resetData);
       } else {
         throw new Error('Failed to send message');
       }
@@ -64,7 +85,7 @@ export default function Contact() {
       setSubmitStatus('error');
       toast({
         title: "Error sending message",
-        description: "Please try again or reach out via email directly.",
+        description: formConfig.errorMessage || "Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -75,7 +96,6 @@ export default function Contact() {
   return (
     <PageTransition>
       <div className="min-h-screen text-white relative overflow-x-hidden">
-        {/* Metallic background - clean, no backdrop */}
         <div 
           className="fixed inset-0 z-0"
           style={{
@@ -83,7 +103,6 @@ export default function Contact() {
           }}
         />
         
-        {/* Subtle ambient glow */}
         <div 
           className="fixed inset-0 z-0"
           style={{
@@ -99,10 +118,8 @@ export default function Contact() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-center mb-12 lg:mb-16"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#B7CBD7] mb-4">Let&apos;s Connect</h1>
-              <p className="text-lg md:text-xl text-[#758DA1]">
-                Have a project in mind or just want to chat about data? Drop me a message.
-              </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#B7CBD7] mb-4">{pageTitle}</h1>
+              <p className="text-lg md:text-xl text-[#758DA1]">{pageSubtitle}</p>
             </motion.div>
 
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -113,7 +130,7 @@ export default function Contact() {
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                 className="glass-card rounded-xl p-6 lg:p-8"
               >
-                <h2 className="text-2xl lg:text-3xl font-bold text-[#B7CBD7] mb-6">Send a Message</h2>
+                <h2 className="text-2xl lg:text-3xl font-bold text-[#B7CBD7] mb-6">{formConfig.title || 'Send a Message'}</h2>
                 
                 {submitStatus === 'success' && (
                   <motion.div
@@ -122,7 +139,7 @@ export default function Contact() {
                     className="mb-6 p-4 rounded-lg bg-[#303F4C]/50 border border-[#5D7386]/50 flex items-center gap-3"
                   >
                     <CheckCircle className="text-[#90AABA]" size={20} />
-                    <span className="text-[#90AABA] text-sm">Message sent successfully! I&apos;ll get back to you soon.</span>
+                    <span className="text-[#90AABA] text-sm">{formConfig.successMessage}</span>
                   </motion.div>
                 )}
                 
@@ -133,73 +150,41 @@ export default function Contact() {
                     className="mb-6 p-4 rounded-lg bg-[#303F4C]/50 border border-red-500/30 flex items-center gap-3"
                   >
                     <AlertCircle className="text-red-400" size={20} />
-                    <span className="text-red-300 text-sm">Failed to send. Please try again or email directly.</span>
+                    <span className="text-red-300 text-sm">{formConfig.errorMessage}</span>
                   </motion.div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-[#90AABA] mb-2">
-                      Name *
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20"
-                      placeholder="Your name"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-[#90AABA] mb-2">
-                      Email *
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-[#90AABA] mb-2">
-                      Company (Optional)
-                    </label>
-                    <Input
-                      id="company"
-                      name="company"
-                      type="text"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20"
-                      placeholder="Your company"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-[#90AABA] mb-2">
-                      Message *
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      required
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={5}
-                      className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20 resize-none"
-                      placeholder="Tell me about your project or inquiry..."
-                    />
-                  </div>
+                  {(formConfig.fields || []).map((field, index) => (
+                    <div key={field.name}>
+                      <label htmlFor={field.name} className="block text-sm font-medium text-[#90AABA] mb-2">
+                        {field.label} {field.required && '*'}
+                      </label>
+                      {field.type === 'textarea' ? (
+                        <Textarea
+                          id={field.name}
+                          name={field.name}
+                          required={field.required}
+                          value={formData[field.name] || ''}
+                          onChange={handleChange}
+                          rows={field.rows || 5}
+                          className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20 resize-none"
+                          placeholder={field.placeholder}
+                        />
+                      ) : (
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          type={field.type}
+                          required={field.required}
+                          value={formData[field.name] || ''}
+                          onChange={handleChange}
+                          className="bg-[#0A1016] border-[#303F4C] text-[#B7CBD7] placeholder:text-[#465969] focus:border-[#5D7386] focus:ring-[#5D7386]/20"
+                          placeholder={field.placeholder}
+                        />
+                      )}
+                    </div>
+                  ))}
 
                   <Button
                     type="submit"
@@ -213,7 +198,7 @@ export default function Contact() {
                       </>
                     ) : (
                       <>
-                        Send Message
+                        {formConfig.submitButton || 'Send Message'}
                         <Send size={18} />
                       </>
                     )}
@@ -229,68 +214,47 @@ export default function Contact() {
                 className="space-y-6"
               >
                 <div className="glass-card rounded-xl p-6 lg:p-8">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-[#B7CBD7] mb-4">Connect With Me</h2>
+                  <h2 className="text-2xl lg:text-3xl font-bold text-[#B7CBD7] mb-4">{connectSection.title || 'Connect With Me'}</h2>
                   <p className="text-[#758DA1] leading-relaxed mb-6 text-sm lg:text-base">
-                    I&apos;m always open to discussing new opportunities, collaborations, or just having a conversation about data analytics and business strategy.
+                    {connectSection.description}
                   </p>
 
                   <div className="space-y-3">
-                    <a
-                      href="https://www.linkedin.com/in/aryan-bansal9/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 bg-[#0A1016] rounded-lg border border-[#303F4C]/50 hover:border-[#5D7386] transition-all group"
-                    >
-                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-[#303F4C] to-[#465969] flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#90AABA]/10 transition-all">
-                        <Linkedin size={22} className="text-[#90AABA]" />
-                      </div>
-                      <div>
-                        <p className="text-[#B7CBD7] font-semibold">LinkedIn</p>
-                        <p className="text-[#5D7386] text-sm">Connect professionally</p>
-                      </div>
-                    </a>
-
-                    <a
-                      href="https://github.com/Aaryan9958"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 bg-[#0A1016] rounded-lg border border-[#303F4C]/50 hover:border-[#5D7386] transition-all group"
-                    >
-                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-[#303F4C] to-[#465969] flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#90AABA]/10 transition-all">
-                        <Github size={22} className="text-[#90AABA]" />
-                      </div>
-                      <div>
-                        <p className="text-[#B7CBD7] font-semibold">GitHub</p>
-                        <p className="text-[#5D7386] text-sm">View my code</p>
-                      </div>
-                    </a>
-
-                    <a
-                      href="mailto:aryan.bansal@simon.rochester.edu"
-                      className="flex items-center gap-4 p-4 bg-[#0A1016] rounded-lg border border-[#303F4C]/50 hover:border-[#5D7386] transition-all group"
-                    >
-                      <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-[#303F4C] to-[#465969] flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#90AABA]/10 transition-all">
-                        <MailIcon size={22} className="text-[#90AABA]" />
-                      </div>
-                      <div>
-                        <p className="text-[#B7CBD7] font-semibold">Email</p>
-                        <p className="text-[#5D7386] text-sm">aryan.bansal@simon.rochester.edu</p>
-                      </div>
-                    </a>
+                    {(connectSection.socialLinks || []).map((link, index) => {
+                      const Icon = iconMap[link.icon] || MailIcon;
+                      return (
+                        <a
+                          key={index}
+                          href={link.url}
+                          target={link.url.startsWith('mailto:') ? undefined : '_blank'}
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-4 p-4 bg-[#0A1016] rounded-lg border border-[#303F4C]/50 hover:border-[#5D7386] transition-all group"
+                        >
+                          <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-[#303F4C] to-[#465969] flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#90AABA]/10 transition-all">
+                            <Icon size={22} className="text-[#90AABA]" />
+                          </div>
+                          <div>
+                            <p className="text-[#B7CBD7] font-semibold">{link.platform}</p>
+                            <p className="text-[#5D7386] text-sm">{link.subtitle}</p>
+                          </div>
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
 
-                <div className="glass-card rounded-xl p-6 lg:p-8 relative overflow-hidden">
-                  {/* Metallic top accent */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#465969] via-[#90AABA] to-[#465969]" />
-                  
-                  <h3 className="text-xl lg:text-2xl font-bold text-[#B7CBD7] mb-3">
-                    Currently Seeking Opportunities
-                  </h3>
-                  <p className="text-[#758DA1] leading-relaxed text-sm lg:text-base">
-                    I&apos;m actively looking for full-time Business Analyst and Data Analyst roles starting December 2025. If you&apos;re hiring or know someone who is, I&apos;d love to connect!
-                  </p>
-                </div>
+                {opportunityCard.title && (
+                  <div className="glass-card rounded-xl p-6 lg:p-8 relative overflow-hidden">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#465969] via-[#90AABA] to-[#465969]" />
+                    
+                    <h3 className="text-xl lg:text-2xl font-bold text-[#B7CBD7] mb-3">
+                      {opportunityCard.title}
+                    </h3>
+                    <p className="text-[#758DA1] leading-relaxed text-sm lg:text-base">
+                      {opportunityCard.description}
+                    </p>
+                  </div>
+                )}
               </motion.div>
             </div>
 
