@@ -374,48 +374,40 @@ const InteractiveMarker = ({
 // Expanded Project Panel Component
 const ProjectPanel = ({ project, position, onClose }) => {
   const panelRef = useRef(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-  // Calculate panel position based on marker
-  const getPanelPosition = () => {
-    // Adjust panel position to stay within viewport
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    
-    if (isMobile) {
-      return {
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        top: 'auto'
-      };
-    }
-
-    // Desktop: Position near marker but centered
-    return {
-      position: 'absolute',
-      left: '50%',
-      top: '50%',
-      transform: 'translate(-50%, -50%)'
-    };
+  // Handle backdrop click
+  const handleBackdropClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
   };
 
-  const panelStyle = getPanelPosition();
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  // Handle close button click
+  const handleCloseClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
+  };
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Backdrop - Fixed positioned with high z-index */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
-        className="fixed inset-0 z-40"
-        style={{ background: 'rgba(10, 16, 22, 0.8)', backdropFilter: 'blur(4px)' }}
-        onClick={onClose}
+        className="fixed inset-0 cursor-pointer"
+        style={{ 
+          background: 'rgba(10, 16, 22, 0.85)', 
+          backdropFilter: 'blur(4px)',
+          zIndex: 9998
+        }}
+        onClick={handleBackdropClick}
       />
 
-      {/* Panel */}
+      {/* Panel - Fixed positioned with highest z-index */}
       <motion.div
         ref={panelRef}
         initial={isMobile 
@@ -431,12 +423,12 @@ const ProjectPanel = ({ project, position, onClose }) => {
           : { scale: 0.8, opacity: 0 }
         }
         transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-        className={`z-50 ${isMobile ? 'fixed bottom-0 left-0 right-0 rounded-t-2xl max-h-[80vh]' : 'absolute w-full max-w-lg rounded-2xl'}`}
+        className={`fixed ${isMobile ? 'bottom-0 left-0 right-0 rounded-t-2xl max-h-[80vh]' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg rounded-2xl'}`}
         style={{
-          ...(!isMobile && { left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }),
           background: 'linear-gradient(145deg, #1C2731 0%, #303F4C 100%)',
           border: '1px solid rgba(144, 170, 186, 0.25)',
-          boxShadow: '0 25px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(144, 170, 186, 0.08)'
+          boxShadow: '0 25px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(144, 170, 186, 0.08)',
+          zIndex: 9999
         }}
         onClick={(e) => e.stopPropagation()}
       >
