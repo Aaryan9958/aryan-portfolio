@@ -386,7 +386,6 @@ export default function Projects() {
             <ProjectPanel
               project={activeProject}
               onClose={handleClosePanel}
-              isMobile={isMobile}
             />
           )}
         </AnimatePresence>
