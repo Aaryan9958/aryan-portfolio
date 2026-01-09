@@ -334,16 +334,18 @@ export default function Projects() {
                 boxShadow: '0 15px 40px rgba(0, 0, 0, 0.3)',
               }}
             >
-              {/* Hero Image - zoomed out to show more pattern */}
+              {/* Hero Image - more compact/zoomed out to show full pattern */}
               <div className="absolute inset-0 overflow-hidden">
                 <img
                   src={HERO_IMAGE}
                   alt="Analytics visualization"
-                  className="w-[130%] h-[130%] object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  className="w-full h-full object-cover"
                   style={{
-                    filter: activeProject ? 'brightness(0.3)' : 'brightness(0.55)',
-                    opacity: 0.85,
+                    filter: activeProject ? 'brightness(0.3)' : 'brightness(0.5)',
+                    opacity: 0.75,
                     transition: 'filter 0.4s ease',
+                    transform: 'scale(0.85)',
+                    transformOrigin: 'center center',
                   }}
                 />
               </div>
