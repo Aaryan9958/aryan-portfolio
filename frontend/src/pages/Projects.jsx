@@ -115,155 +115,91 @@ const Marker = ({ position, project, isActive, onSelect, index }) => {
   );
 };
 
-// Project Details Panel Component
+// Project Details Panel Component - matches Experience modal style
 const ProjectPanel = ({ project, onClose, isMobile }) => {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
       {/* Backdrop */}
+      <div className="absolute inset-0 overlay-backdrop" />
+
+      {/* Modal Panel - centered like Experience */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
         transition={{ duration: 0.3 }}
-        className="fixed inset-0 cursor-pointer"
-        style={{
-          background: 'rgba(10, 16, 22, 0.85)',
-          backdropFilter: 'blur(4px)',
-          zIndex: 100,
-        }}
-        onClick={onClose}
-      />
-
-      {/* Panel */}
-      <motion.div
-        initial={isMobile ? { y: '100%' } : { scale: 0.9, opacity: 0 }}
-        animate={isMobile ? { y: 0 } : { scale: 1, opacity: 1 }}
-        exit={isMobile ? { y: '100%' } : { scale: 0.9, opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-        className={`fixed ${
-          isMobile
-            ? 'bottom-0 left-0 right-0 rounded-t-2xl max-h-[85vh]'
-            : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md rounded-2xl'
-        }`}
-        style={{
-          background: 'linear-gradient(145deg, #1C2731 0%, #303F4C 100%)',
-          border: '1px solid rgba(144, 170, 186, 0.2)',
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(144, 170, 186, 0.06)',
-          zIndex: 101,
-        }}
         onClick={(e) => e.stopPropagation()}
+        className="experience-modal relative rounded-2xl p-6 md:p-8 w-full max-w-lg max-h-[80vh] overflow-y-auto card-scroll z-10"
       >
-        {/* Mobile drag handle */}
-        {isMobile && (
-          <div className="flex justify-center pt-3 pb-1">
-            <div className="w-10 h-1 bg-[#5D7386] rounded-full" />
-          </div>
-        )}
-
         {/* Close button */}
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onClose();
-          }}
-          className="absolute top-4 right-4 w-10 h-10 rounded-full hover:bg-[#465969]/50 transition-colors flex items-center justify-center cursor-pointer"
-          style={{ zIndex: 110 }}
-          type="button"
-          aria-label="Close panel"
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#303F4C] flex items-center justify-center hover:bg-[#465969] transition-colors"
         >
-          <X className="w-5 h-5 text-[#90AABA]" />
+          <X size={16} className="text-[#90AABA]" />
         </button>
 
         {/* Content */}
-        <div className="p-6 md:p-8 overflow-y-auto max-h-[75vh]">
+        <div className="pr-8">
           {/* Title */}
-          <motion.h3
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-xl md:text-2xl font-bold text-[#B7CBD7] mb-2 pr-8"
-          >
-            {project.title}
-          </motion.h3>
+          <div className="mb-4">
+            <h3 className="text-xl md:text-2xl font-bold text-[#B7CBD7] mb-2">
+              {project.title}
+            </h3>
+          </div>
 
           {/* Problem Statement */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="text-[#90AABA] text-sm mb-5 leading-relaxed"
-          >
+          <p className="text-[#758DA1] text-sm mb-4 italic border-l-2 border-[#465969] pl-3">
             {project.shortDescription}
-          </motion.p>
+          </p>
 
           {/* What I Did */}
           {project.bullets && project.bullets.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-5"
-            >
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-[#758DA1] mb-3">
-                What I Did
-              </h4>
-              <ul className="space-y-2">
+            <div className="space-y-3 mb-4">
+              <h4 className="text-sm font-semibold text-[#90AABA] uppercase tracking-wider">What I Did</h4>
+              <ul className="space-y-3">
                 {project.bullets.slice(0, 3).map((bullet, idx) => (
-                  <li key={idx} className="text-[#90AABA] text-sm flex items-start gap-2">
-                    <span className="text-[#90AABA] mt-1">•</span>
+                  <li key={idx} className="text-[#758DA1] text-sm flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#90AABA] mt-2 flex-shrink-0" />
                     <span>{bullet}</span>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           )}
 
           {/* Tools / Methods */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="mb-5"
-          >
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-[#758DA1] mb-3">
-              Tools & Methods
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {(project.tags || []).slice(0, 5).map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="px-3 py-1 text-xs rounded-full bg-[#303F4C]/60 text-[#90AABA] border border-[#5D7386]/30"
-                >
-                  {tag}
-                </span>
-              ))}
+          {(project.tags && project.tags.length > 0) && (
+            <div className="mt-4 pt-4 border-t border-[#303F4C]">
+              <h4 className="text-xs font-semibold text-[#5D7386] uppercase tracking-wider mb-2">Tools & Methods</h4>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.slice(0, 5).map((tag, idx) => (
+                  <span key={idx} className="tag text-xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          )}
 
           {/* Outcome */}
           {project.outcome && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mb-6"
-            >
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-[#758DA1] mb-2">
-                Outcome
-              </h4>
-              <p className="text-[#758DA1] text-sm">{project.outcome}</p>
-            </motion.div>
+            <div className="mt-4 pt-4 border-t border-[#303F4C]">
+              <h4 className="text-xs font-semibold text-[#5D7386] uppercase tracking-wider mb-2">Outcome</h4>
+              <p className="text-[#90AABA] text-sm">{project.outcome}</p>
+            </div>
           )}
 
           {/* Action Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="pt-2"
-          >
-            {project.links?.github && (
+          {project.links?.github && (
+            <div className="mt-6">
               <a
                 href={project.links.github}
                 target="_blank"
@@ -274,11 +210,11 @@ const ProjectPanel = ({ project, onClose, isMobile }) => {
                   View Project
                 </Button>
               </a>
-            )}
-          </motion.div>
+            </div>
+          )}
         </div>
       </motion.div>
-    </>
+    </motion.div>
   );
 };
 
