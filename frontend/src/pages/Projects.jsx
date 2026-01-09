@@ -20,9 +20,37 @@ const MARKER_POSITIONS = [
   { x: 68, y: 60 },   // Bottom-right
 ];
 
+// Helper function to split title into 2 lines
+const splitTitleToLines = (title) => {
+  // Check for em dash, hyphen, or colon separators
+  const separators = [' — ', ' - ', ': '];
+  for (const sep of separators) {
+    if (title.includes(sep)) {
+      const parts = title.split(sep);
+      return {
+        line1: parts[0].trim(),
+        line2: parts.slice(1).join(sep).trim()
+      };
+    }
+  }
+  
+  // No separator found - split by first 2 words
+  const words = title.split(' ');
+  if (words.length <= 2) {
+    return { line1: title, line2: '' };
+  }
+  return {
+    line1: words.slice(0, 2).join(' '),
+    line2: words.slice(2).join(' ')
+  };
+};
+
 // Interactive Marker Component
 const Marker = ({ position, project, isActive, onSelect, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Get split title for 2-line tooltip
+  const titleLines = splitTitleToLines(project.title);
 
   return (
     <motion.div
@@ -83,7 +111,7 @@ const Marker = ({ position, project, isActive, onSelect, index }) => {
         <Plus className="w-5 h-5 text-[#B7CBD7]" />
       </motion.div>
 
-      {/* Tooltip on hover */}
+      {/* Tooltip on hover - 2 line format */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
@@ -91,14 +119,24 @@ const Marker = ({ position, project, isActive, onSelect, index }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.2 }}
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 whitespace-nowrap px-4 py-2 rounded-lg pointer-events-none"
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 px-4 py-2.5 rounded-lg pointer-events-none"
             style={{
               background: 'linear-gradient(135deg, #1C2731 0%, #303F4C 100%)',
               border: '1px solid rgba(144, 170, 186, 0.3)',
               boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+              maxWidth: '180px',
+              textAlign: 'center',
+              whiteSpace: 'normal',
             }}
           >
-            <span className="text-sm font-medium text-[#B7CBD7]">{project.title}</span>
+            <div className="text-sm font-medium text-[#B7CBD7] leading-tight">
+              {titleLines.line1}
+            </div>
+            {titleLines.line2 && (
+              <div className="text-sm font-medium text-[#90AABA] leading-tight mt-0.5">
+                {titleLines.line2}
+              </div>
+            )}
             {/* Arrow */}
             <div
               className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45"
