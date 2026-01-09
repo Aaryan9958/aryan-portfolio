@@ -285,34 +285,37 @@ export default function Projects() {
               </p>
             </motion.div>
 
-            {/* Hero Image with Markers */}
+            {/* Hero Image with Markers - scaled down for subtle backdrop effect */}
             <motion.div
               ref={sectionRef}
               initial={{ opacity: 0, scale: 0.98 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative w-full aspect-[16/9] rounded-xl overflow-hidden"
+              className="relative w-full max-w-4xl mx-auto aspect-[16/10] rounded-xl overflow-hidden"
               style={{
-                border: '1px solid rgba(144, 170, 186, 0.15)',
-                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
+                border: '1px solid rgba(144, 170, 186, 0.12)',
+                boxShadow: '0 15px 40px rgba(0, 0, 0, 0.3)',
               }}
             >
-              {/* Hero Image */}
-              <img
-                src={HERO_IMAGE}
-                alt="Analytics visualization"
-                className="w-full h-full object-cover"
-                style={{
-                  filter: activeProject ? 'brightness(0.4)' : 'brightness(0.7)',
-                  transition: 'filter 0.4s ease',
-                }}
-              />
+              {/* Hero Image - zoomed out to show more pattern */}
+              <div className="absolute inset-0 overflow-hidden">
+                <img
+                  src={HERO_IMAGE}
+                  alt="Analytics visualization"
+                  className="w-[130%] h-[130%] object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    filter: activeProject ? 'brightness(0.3)' : 'brightness(0.55)',
+                    opacity: 0.85,
+                    transition: 'filter 0.4s ease',
+                  }}
+                />
+              </div>
 
-              {/* Overlay gradient for better marker visibility */}
+              {/* Vignette overlay for subtle/hazy effect */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(ellipse at center, transparent 30%, rgba(10, 16, 22, 0.5) 100%)',
+                  background: 'radial-gradient(ellipse at center, transparent 20%, rgba(10, 16, 22, 0.6) 80%, rgba(10, 16, 22, 0.85) 100%)',
                 }}
               />
 
