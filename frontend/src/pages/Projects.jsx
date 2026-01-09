@@ -220,18 +220,11 @@ const ProjectPanel = ({ project, onClose, isMobile }) => {
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
-    // Check for mobile
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Get exactly 5 projects from JSON
