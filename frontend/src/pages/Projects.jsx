@@ -124,16 +124,17 @@ const Marker = ({ position, project, isActive, onSelect, index }) => {
               background: 'linear-gradient(135deg, #1C2731 0%, #303F4C 100%)',
               border: '1px solid rgba(144, 170, 186, 0.3)',
               boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
-              maxWidth: '180px',
+              maxWidth: '200px',
+              minWidth: '120px',
               textAlign: 'center',
               whiteSpace: 'normal',
             }}
           >
-            <div className="text-sm font-medium text-[#B7CBD7] leading-tight">
+            <div className="text-sm font-medium text-[#B7CBD7] leading-snug">
               {titleLines.line1}
             </div>
             {titleLines.line2 && (
-              <div className="text-sm font-medium text-[#90AABA] leading-tight mt-0.5">
+              <div className="text-xs font-medium text-[#90AABA] leading-snug mt-1">
                 {titleLines.line2}
               </div>
             )}
