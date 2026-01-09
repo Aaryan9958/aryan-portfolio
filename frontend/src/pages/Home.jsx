@@ -51,21 +51,22 @@ export default function Home() {
         {/* Hero Section */}
         <CinematicSection backgroundImage={slides?.backgrounds?.hero}>
           <div className="flex flex-col items-center justify-center min-h-[80vh]">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto">
-              {/* Left: Headshot with metallic frame */}
-              <div className="flex flex-col items-center lg:items-center order-1 lg:order-1">
+            {/* Hero grid - adjusted for better alignment */}
+            <div className="grid lg:grid-cols-[1fr_1.1fr] gap-6 lg:gap-8 items-start w-full max-w-6xl mx-auto">
+              {/* Left: Headshot with metallic frame - adjusted positioning */}
+              <div className="flex flex-col items-center lg:items-end lg:justify-start order-1 lg:order-1 lg:pr-4">
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="relative"
+                  className="relative lg:-mt-2"
                 >
                   {/* Metallic glow behind image */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#5D7386]/30 to-[#90AABA]/20 rounded-2xl blur-3xl scale-110" />
                   
-                  {/* Metal panel frame */}
+                  {/* Metal panel frame - responsive sizing */}
                   <div className="relative p-1 rounded-2xl bg-gradient-to-br from-[#465969] via-[#5D7386] to-[#465969]">
-                    <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-xl overflow-hidden bg-[#1C2731]">
+                    <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-[340px] md:h-[340px] lg:w-[360px] lg:h-[360px] xl:w-[380px] xl:h-[380px] rounded-xl overflow-hidden bg-[#1C2731]">
                       <img
                         src={media?.headshot || ''}
                         alt={media?.headshotAlt || hero?.name || 'Profile Photo'}
@@ -84,8 +85,8 @@ export default function Home() {
                 </motion.div>
               </div>
 
-              {/* Right: Info */}
-              <div className="space-y-5 order-2 lg:order-2 text-center lg:text-left">
+              {/* Right: Info - aligned to start */}
+              <div className="space-y-5 order-2 lg:order-2 text-center lg:text-left lg:pt-2">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
