@@ -116,7 +116,13 @@ const Marker = ({ position, project, isActive, onSelect, index }) => {
 };
 
 // Project Details Panel Component - matches Experience modal style
-const ProjectPanel = ({ project, onClose, isMobile }) => {
+const ProjectPanel = ({ project, onClose }) => {
+  // Handle close button click explicitly
+  const handleCloseClick = (e) => {
+    e.stopPropagation();
+    onClose();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -138,10 +144,10 @@ const ProjectPanel = ({ project, onClose, isMobile }) => {
         onClick={(e) => e.stopPropagation()}
         className="experience-modal relative rounded-2xl p-6 md:p-8 w-full max-w-lg max-h-[80vh] overflow-y-auto card-scroll z-10"
       >
-        {/* Close button */}
+        {/* Close button - explicit handler like Experience page */}
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#303F4C] flex items-center justify-center hover:bg-[#465969] transition-colors"
+          onClick={handleCloseClick}
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#303F4C] flex items-center justify-center hover:bg-[#465969] transition-colors z-20"
         >
           <X size={16} className="text-[#90AABA]" />
         </button>
