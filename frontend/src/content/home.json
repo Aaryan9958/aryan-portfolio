@@ -1,14 +1,14 @@
 {
   "hero": {
     "name": "Aryan Bansal",
-    "headline": "Turning data into decisions.",
-    "subheadline": "Business Analyst | SQL | Python | Tableau",
+    "headline": "Data. Insight. Impact.",
+    "subheadline": "Analytics, strategy, and problem-solving with real-world impact",
     "bio": "Ever feel like your data is trying to tell you something? I do. With SQL, Python, and a strong cup of coffee, I dive into messy datasets to find the 'aha!' moments that help teams make smarter moves.",
     "education": {
       "degree": "MS in Business Analytics",
       "school": "Simon Business School",
       "graduationDate": "Dec 2025",
-      "highlights": ["Merit Scholarship", "Advanced Certificate in AI"]
+      "highlights": ["Advanced Certificate in AI"]
     },
     "ctaButton": {
       "text": "Get in Touch",
@@ -25,7 +25,7 @@
     {
       "id": "projects",
       "label": "Projects Completed",
-      "value": 4,
+      "value": 5,
       "suffix": "+",
       "description": "End-to-end analytics & experimentation work",
       "icon": "Briefcase"
@@ -50,7 +50,7 @@
       "id": "team",
       "label": "Team Members Led",
       "value": 25,
-      "suffix": "",
+      "suffix": "+",
       "description": "Cross-functional team leadership",
       "icon": "Users"
     }
@@ -68,9 +68,9 @@
       { "name": "SQL", "years": 2, "futureYears": 3.5 },
       { "name": "Python", "years": 2, "futureYears": 4 },
       { "name": "Tableau", "years": 2, "futureYears": 3 },
-      { "name": "Analytics", "years": 1.5, "futureYears": 3.5 },
-      { "name": "A/B Testing", "years": 1, "futureYears": 2.5 },
-      { "name": "Strategy", "years": 3, "futureYears": 5 },
+      { "name": "Excel", "years": 1.5, "futureYears": 3.5 },
+      { "name": "Statistical Analytics", "years": 1, "futureYears": 2.5 },
+      { "name": "Business Strategy", "years": 3, "futureYears": 5 },
       { "name": "ML/AI", "years": 1, "futureYears": 3 }
     ]
   },
@@ -137,7 +137,7 @@
     "socialLinks": [
       {
         "platform": "LinkedIn",
-        "url": "https://www.linkedin.com/in/aryan-bansal9/",
+        "url": "www.linkedin.com/in/aryan-bansal-simon-edu",
         "icon": "Linkedin"
       },
       {
@@ -147,7 +147,7 @@
       },
       {
         "platform": "Email",
-        "url": "mailto:aryan.bansal@simon.rochester.edu",
+        "url": "mailto:aryanbansal2105@gmail.com",
         "icon": "Mail"
       }
     ]
