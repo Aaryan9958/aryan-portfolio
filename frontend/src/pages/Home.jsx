@@ -165,7 +165,7 @@ export default function Home() {
 
         {/* Skills Chart Section */}
         <CinematicSection backgroundImage={slides?.backgrounds?.skills}>
-          <div className="flex flex-col items-center justify-center min-h-[80vh] py-8">
+          <div className="flex flex-col items-center justify-center min-h-[70vh] md:min-h-[80vh] py-4 md:py-8">
             <SkillsChart />
           </div>
         </CinematicSection>
