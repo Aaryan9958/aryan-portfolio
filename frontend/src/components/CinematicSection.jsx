@@ -7,7 +7,7 @@ export default function CinematicSection({
   isLastSection = false 
 }) {
   return (
-    <div className={`relative w-full h-screen flex items-center justify-center ${className}`}>
+    <div className={`relative w-full min-h-screen md:h-screen flex items-center justify-center ${className}`}>
       {/* Background image layer (faint, behind metallic glass) */}
       {backgroundImage && (
         <>
@@ -52,12 +52,15 @@ export default function CinematicSection({
         }}
       />
 
-      {/* Foreground content */}
+      {/* Foreground content - mobile-friendly with safe area padding */}
       <motion.div
         initial={{ opacity: 0, y: 40, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-        className="relative z-20 w-full h-full max-w-7xl mx-auto px-6 lg:px-12 overflow-y-auto card-scroll pt-24 pb-8"
+        className="relative z-20 w-full h-full max-w-7xl mx-auto px-4 md:px-6 lg:px-12 overflow-y-auto card-scroll pt-20 md:pt-24 pb-safe"
+        style={{
+          paddingBottom: 'max(2rem, env(safe-area-inset-bottom, 2rem))',
+        }}
       >
         {children}
       </motion.div>
