@@ -139,7 +139,7 @@ function SkillBar({ skill, index, isInView, onAnimationComplete, maxYears }) {
 
 export default function SkillsChart() {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
   const [showMessage, setShowMessage] = useState(false);
   const [completedBars, setCompletedBars] = useState(0);
 
@@ -164,31 +164,36 @@ export default function SkillsChart() {
 
   return (
     <div ref={containerRef} className="w-full">
-      {/* Section header */}
+      {/* Section header - reduced spacing on mobile */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        className="text-center mb-10"
+        className="text-center mb-6 md:mb-10"
       >
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#B7CBD7] mb-3">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#B7CBD7] mb-2 md:mb-3">
           {title}
         </h2>
-        <p className="text-base text-[#758DA1]">
+        <p className="text-sm md:text-base text-[#758DA1]">
           {subtitle}
         </p>
       </motion.div>
 
-      {/* Skills chart container */}
-      <div className="glass-card rounded-2xl p-6 md:p-8 relative overflow-visible">
-        {/* Y-axis labels */}
-        <div className="absolute left-2 md:left-4 top-8 bottom-20 flex flex-col justify-between text-xs text-[#5D7386]">
+      {/* Skills chart container - mobile-optimized with max-height and scroll */}
+      <div 
+        className="glass-card rounded-2xl p-4 md:p-6 lg:p-8 relative overflow-visible"
+        style={{
+          maxHeight: 'calc(100vh - 220px)',
+        }}
+      >
+        {/* Y-axis labels - hidden on very small screens */}
+        <div className="absolute left-1 md:left-4 top-6 md:top-8 bottom-16 md:bottom-20 flex flex-col justify-between text-[10px] md:text-xs text-[#5D7386]">
           {Array.from({ length: maxYears + 1 }, (_, i) => maxYears - i).map((year) => (
             <span key={year}>{year}y</span>
           ))}
         </div>
 
-        {/* Bars container */}
-        <div className="flex items-end justify-center gap-4 md:gap-6 lg:gap-8 ml-8 md:ml-12">
+        {/* Bars container - responsive gaps */}
+        <div className="flex items-end justify-center gap-2 sm:gap-3 md:gap-6 lg:gap-8 ml-6 md:ml-12">
           {skillsData.map((skill, index) => (
             <SkillBar
               key={skill.name}
@@ -201,11 +206,11 @@ export default function SkillsChart() {
           ))}
         </div>
 
-        {/* Floating message */}
+        {/* Floating message - hidden on mobile to save space */}
         <AnimatePresence>
           {showMessage && floatingMessage && (
             <motion.div
-              className="absolute -top-16 left-1/2 -translate-x-1/2 text-center"
+              className="hidden md:block absolute -top-16 left-1/2 -translate-x-1/2 text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -217,19 +222,19 @@ export default function SkillsChart() {
           )}
         </AnimatePresence>
 
-        {/* Legend */}
+        {/* Legend - compact on mobile */}
         <motion.div
-          className="flex items-center justify-center gap-6 mt-8 text-xs"
+          className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mt-4 md:mt-8 text-[10px] md:text-xs"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 2 }}
         >
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded skill-bar" />
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <div className="w-3 h-3 md:w-4 md:h-4 rounded skill-bar" />
             <span className="text-[#758DA1]">{legend.current}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-0.5 projection-line" />
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <div className="w-3 md:w-4 h-0.5 projection-line" />
             <span className="text-[#758DA1]">{legend.projection}</span>
           </div>
         </motion.div>
