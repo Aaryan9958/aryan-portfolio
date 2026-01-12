@@ -180,20 +180,20 @@ export default function SkillsChart() {
 
       {/* Skills chart container - mobile-optimized with max-height and scroll */}
       <div 
-        className="glass-card rounded-2xl p-4 md:p-6 lg:p-8 relative overflow-visible"
+        className="glass-card rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 relative overflow-hidden"
         style={{
           maxHeight: 'calc(100vh - 220px)',
         }}
       >
-        {/* Y-axis labels - hidden on very small screens */}
-        <div className="absolute left-1 md:left-4 top-6 md:top-8 bottom-16 md:bottom-20 flex flex-col justify-between text-[10px] md:text-xs text-[#5D7386]">
+        {/* Y-axis labels - positioned with proper spacing */}
+        <div className="absolute left-2 sm:left-3 md:left-4 top-6 md:top-8 bottom-16 md:bottom-20 flex flex-col justify-between text-[9px] sm:text-[10px] md:text-xs text-[#5D7386]">
           {Array.from({ length: maxYears + 1 }, (_, i) => maxYears - i).map((year) => (
             <span key={year}>{year}y</span>
           ))}
         </div>
 
-        {/* Bars container - responsive gaps */}
-        <div className="flex items-end justify-center gap-2 sm:gap-3 md:gap-6 lg:gap-8 ml-6 md:ml-12">
+        {/* Bars container - responsive gaps with proper margins */}
+        <div className="flex items-end justify-center gap-1.5 sm:gap-2 md:gap-6 lg:gap-8 mx-6 sm:mx-8 md:ml-12 md:mr-4">
           {skillsData.map((skill, index) => (
             <SkillBar
               key={skill.name}
