@@ -58,8 +58,8 @@ function SkillBar({ skill, index, isInView, onAnimationComplete, maxYears }) {
     <div className="flex flex-col items-center gap-2 md:gap-3 relative">
       {/* Bar container - responsive height */}
       <div 
-        className="relative w-10 sm:w-12 md:w-14 rounded-t-lg overflow-visible"
-        style={{ height: 'clamp(120px, 25vh, 200px)' }}
+        className="relative w-8 sm:w-10 md:w-14 rounded-t-lg overflow-visible"
+        style={{ height: 'clamp(100px, 22vh, 200px)' }}
       >
         <div className="absolute bottom-0 left-0 right-0 h-full bg-gradient-to-t from-[#1C2731] to-[#0A1016] rounded-t-lg border border-[#303F4C]/30" />
         
@@ -95,7 +95,7 @@ function SkillBar({ skill, index, isInView, onAnimationComplete, maxYears }) {
         <AnimatePresence>
           {projectionComplete && (
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#B7CBD7]"
+              className="absolute left-1/2 -translate-x-1/2 w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-[#B7CBD7]"
               style={{ bottom: `${(skill.futureYears / maxYears) * 100}%` }}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -115,8 +115,8 @@ function SkillBar({ skill, index, isInView, onAnimationComplete, maxYears }) {
         )}
 
         <motion.div
-          className="absolute left-1/2 -translate-x-1/2 text-[10px] md:text-xs font-bold text-[#B7CBD7] pointer-events-none"
-          style={{ bottom: `calc(${barHeight}% - 20px)` }}
+          className="absolute left-1/2 -translate-x-1/2 text-[8px] sm:text-[10px] md:text-xs font-bold text-[#B7CBD7] pointer-events-none"
+          style={{ bottom: `calc(${barHeight}% - 18px)` }}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: animationDelay + 0.8 }}
@@ -126,7 +126,8 @@ function SkillBar({ skill, index, isInView, onAnimationComplete, maxYears }) {
       </div>
 
       <motion.span
-        className="text-[10px] sm:text-xs md:text-sm font-medium text-[#90AABA] text-center whitespace-nowrap"
+        className="text-[8px] sm:text-[10px] md:text-sm font-medium text-[#90AABA] text-center max-w-[50px] sm:max-w-[60px] md:max-w-none leading-tight"
+        style={{ wordBreak: 'break-word' }}
         initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: animationDelay + 0.5 }}
