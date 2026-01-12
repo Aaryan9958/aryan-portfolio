@@ -34,7 +34,7 @@
       "order": 2
     },
     {
-      "id": "Craigslist Forum",
+      "id": "Craigslist-Forum",
       "title": "Craigslist Forum Analytics — NLP Product Insights",
       "shortDescription": "Turned unstructured forum feedback into structured, actionable product insights using an end-to-end NLP pipeline.",
       "bullets": [
@@ -48,7 +48,7 @@
       "order": 3
     },
     {
-      "id": "Data Warehousing",
+      "id": "Data-Warehousing",
       "title": "Data Warehousing — Analytics & Reporting Pipeline",
       "shortDescription": "Designed a structured data warehouse to enable reliable reporting, analytics, and decision-making.",
       "bullets": [
