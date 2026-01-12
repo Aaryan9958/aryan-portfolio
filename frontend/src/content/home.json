@@ -16,7 +16,7 @@
     }
   },
   "media": {
-    "headshot": "frontend/public/assets/Gemini_Generated_Image_362ris362ris362r.png",
+    "headshot": "/assets/Gemini_Generated_Image_362ris362ris362r.png",
     "headshotAlt": "Aryan Bansal - Business Analytics Professional",
     "heroVideo": "",
     "backgroundPattern": ""
