@@ -16,7 +16,7 @@
       ],
       "tags": ["Python", "Regression", "Time-Series", "Operations"],
       "outcome": "Delivered operational recommendations to increase throughput by 15%",
-      "links": { "https://github.com/Aaryan9958/Perry-s_Icecream_Project" },
+      "links": {"github":"https://github.com/Aaryan9958/Perry-s_Icecream_Project" },
       "order": 1
     },
     {
