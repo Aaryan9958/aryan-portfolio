@@ -279,6 +279,7 @@ function MobileRoadmap({ experiences, activeId, onPinClick }) {
 
 export default function Experience() {
   const [activeId, setActiveId] = useState(null);
+  const [showHint, setShowHint] = useState(true);
   
   // Get experiences from JSON, sorted by order
   const experiences = (experienceData.experiences || [])
@@ -290,9 +291,17 @@ export default function Experience() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Auto-hide hint after 8 seconds
+    const timer = setTimeout(() => {
+      setShowHint(false);
+    }, 8000);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const handlePinClick = (id) => {
+    setShowHint(false); // Hide hint when user clicks a marker
     setActiveId(activeId === id ? null : id);
   };
 
@@ -342,6 +351,66 @@ export default function Experience() {
                 From insights to impact: my professional roadmap
               </p>
             </motion.div>
+
+            {/* Hint popup for clicking markers */}
+            <AnimatePresence>
+              {showHint && !activeId && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4, delay: 1 }}
+                  className="flex justify-center mb-4"
+                >
+                  <div 
+                    className="relative px-5 py-3 rounded-xl flex items-center gap-3 cursor-pointer"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(28, 39, 49, 0.95) 0%, rgba(48, 63, 76, 0.9) 100%)',
+                      border: '1px solid rgba(144, 170, 186, 0.3)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(144, 170, 186, 0.1)',
+                    }}
+                    onClick={() => setShowHint(false)}
+                  >
+                    {/* Pulsing pin icon */}
+                    <div className="relative">
+                      <motion.div
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        className="w-8 h-8 rounded-full bg-gradient-to-br from-[#465969] to-[#5D7386] flex items-center justify-center"
+                      >
+                        <MapPin size={16} className="text-[#B7CBD7]" />
+                      </motion.div>
+                      <motion.div
+                        animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+                        className="absolute inset-0 rounded-full border border-[#90AABA]"
+                      />
+                    </div>
+                    
+                    {/* Text */}
+                    <div className="text-left">
+                      <p className="text-sm font-medium text-[#B7CBD7]">
+                        Click on markers
+                      </p>
+                      <p className="text-xs text-[#758DA1]">
+                        to explore each experience
+                      </p>
+                    </div>
+                    
+                    {/* Close button */}
+                    <button 
+                      className="ml-2 p-1 rounded-full hover:bg-[#465969]/50 transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowHint(false);
+                      }}
+                    >
+                      <X size={14} className="text-[#5D7386]" />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <DesktopRoadmap 
               experiences={experiences} 
