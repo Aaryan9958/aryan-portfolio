@@ -69,9 +69,12 @@ export default function Preloader({ onComplete }) {
   const keywords = preloaderConfig.keywords || [];
   
   // Get hero name from home.json
-  const heroName = homeData.hero?.name || 'Loading...';
+ const heroName = homeData.hero?.name || 'Loading...';
 
-  const keywordData = useMemo(() => generateKeywordData(keywords), [keywords]);
+  const keywordData = useMemo(() => {
+    const keywords = preloaderConfig.keywords || [];
+    return generateKeywordData(keywords);
+  }, [preloaderConfig.keywords]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
