@@ -38,7 +38,7 @@ export default function Contact() {
       initialData[field.name] = '';
     });
     setFormData(initialData);
-  }, []);
+  }, [formConfig.fields]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
